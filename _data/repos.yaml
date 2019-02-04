@@ -1,0 +1,319 @@
+- div: 2019
+
+- title: Studying at University of Bristol
+  desc: 
+    Final Year, MEng Computer Science with Study Abroad
+  lastcommit: 8/19
+
+- title: Outreach Officer at CSS Bristol
+  links:
+  - url: //cssbristol.co.uk
+  desc: 
+    Coordinating with University of Bristol and external organisations to increase STEM engagement, I also held the position of Acting Press Officer from September to December 2018, managing branding, publicity and social media presence for the 2.1k+ member society
+  lastcommit: 8/19
+
+- title: Teaching Assistant at University of Bristol
+  desc: 
+    Mentoring undergraduate teams on the fulfillment of client-driven software development projects, and helping with the teaching of Agile methodology, database technologies and computer security
+  lastcommit: 8/19
+
+- title: Bristol PLUS Award
+  desc: 
+    Award for extra-curricular development endorsed by companies and professional bodies like Accenture, BAE Systems and ICAEW
+  lastcommit: 8/19
+
+- div: 2018
+
+- title: Takon.me
+  links:
+  - url: //takon.me
+  - url: gh!jda0/cloud
+  langs:
+  - aws
+  - js
+  - node
+  - nosql
+  - react
+  - web
+  desc: An online continuous double auction for event tickets
+  svg: takon-mark
+  private: true
+  lastcommit: 1/19
+
+- title: Proc
+  links:
+  - url: gh!jda0/proc_simple
+  langs:
+  - cpp
+  desc: A superscalar processor simulator, with modular architecture and customisable ISA
+  private: true
+  lastcommit: 1/19
+
+- title: Hedgehog Bot
+  links:
+  - url: //hedgehogbot.digimakers.org.uk
+  langs: 
+  - arduino
+  - cpp
+  - js
+  - ux
+  - web
+  desc: A redesigned home, with new activities and learning resources, for the introduction to IoT and robotics used by 500+ children
+  svg: hedgehog-bot
+  tag:
+    type: organization
+    title: MVSE-Outreach
+    url: mvse-outreach
+  lastcommit: 11/18
+
+- title: Themes
+  links:
+  - url: gh!hundredrabbits/themes
+  langs: 
+  - js
+  desc: WCAG2 evaluation for the Hundred Rabbits theme ecosystem
+  svg: themes-mark
+  tag:
+    type: git-merge
+    title: hundredrabbits/themes
+    url: hundredrabbits/themes
+  lastcommit: 9/18
+  
+- title: Yu-Scan Be
+  links:
+  - url: gl!yuscan
+  langs: 
+  - arduino
+  - cpp
+  - js
+  - node
+  - nosql
+  - rn
+  desc: 
+    Cross-platform app, backend for messaging and data sync, and BLE firmware for a health and wellness startup
+  svg: yuscan-mark
+  tag:
+    type: organization
+    title: Yu-Scan Labs
+    url: gl!yuscan
+  lastcommit: 9/18
+
+# - title: Donsol
+#   links:
+#   - url: gh!hundredrabbits/donsol
+#   langs: 
+#   - js
+#   desc: An Electron port of a card game designed by John Eternal
+#   svg: donsol-mark
+#   tag:
+#     type: git-merge
+#     title: hundredrabbits/donsol
+#     url: hundredrabbits/donsol
+#   lastcommit: 4/18
+
+- title: Studied at HKUST
+  desc: 
+    An exchange year at Hong Kong University of Science and Technology, studying Deep Learning for Vision, AI, Cloud Computing/Big Data, Cybersecurity, AI Entrepreneurship, Graphics Rendering and Social Information Networks
+  lastcommit: 8/19
+
+- title: Animator &amp; Trace
+  links:
+  - url: gh!jda0/comp4411-4
+    title: Animator
+  - url: gh!jda0/comp4411-3
+    title: Trace
+  langs: 
+  - cpp
+  desc: 3D Spline-Based Animation System and Ray-Tracing OpenGL Renderer
+  svg: trace-mark
+  private: true
+  lastcommit: 4/18
+
+- title: Impressionist
+  links:
+  - url: gh!jda0/comp4411-1
+  langs: 
+  - cpp
+  desc: An Impressionist Painting Program
+  svg: impressionist-mark
+  private: true
+  lastcommit: 2/18
+
+- title: Cactus
+  links:
+  - url: gh!jda0/cactus
+  langs: 
+  - scss
+  - ux
+  desc: An Opinionated SCSS Framework
+  svg: cactus-mark
+  lastcommit: 2/18
+
+- div: 2017
+
+- title: Canaries
+  links:
+  - url: gh!jda0/comp3632-1
+  langs: 
+  - cpp
+  desc: Buffer Overflow Implementations
+  private: true
+  svg: canary-mark
+  lastcommit: 12/17
+
+- title: Score
+  links:
+  - url: //m.me/jda-score
+    title: Message
+  langs: 
+  - aws
+  - js
+  - nosql
+  desc: Messenger Bot for Competition Management
+  svg: score-mark
+  lastcommit: 12/17
+
+- title: Convolutional Networks
+  links:
+  - url: gh!jda0/comp4901j-2
+  langs: 
+  - py
+  - tf
+  desc: Fully-Connected Neural Networks for Vision
+  svg: tensorflow-mark
+  private: true
+  lastcommit: 12/17
+
+- title: K-Anonymity
+  links:
+  - url: gh!jda0/comp3632-kanon
+  langs: 
+  - py
+  desc: Implementation of K-Anonymity
+  svg: kanon-mark
+  private: true
+  lastcommit: 11/17
+
+- title: Style Transfer
+  links:
+  - url: gh!jda0/comp4901j-3
+  langs: 
+  - py
+  - tf
+  desc: GANs, Captioning and Style Transfer with Neural Networks
+  svg: tensorflow-mark
+  private: true
+  lastcommit: 11/17
+
+- title: Project Martini
+  links:
+  - url: gh!jda0/qbranch-martini
+  langs:
+  - aws
+  - cpp 
+  - js
+  - node
+  - nosql
+  - rn
+  - ux
+  desc: Smart heating control for enterprise with intelligent scheduling and conflict resolution, focused on energy efficiency and controllable from users' smartphones
+  svg: martini-mark
+  private: true
+  tag:
+    type: organization
+    title: Q Branch
+    url: rubenwardy
+  lastcommit: 5/17
+
+- div: 2016
+
+- title: The Duke of Edinburgh's Gold Award
+  desc: The highest in a series of awards requiring up to 18 months of volunteering, personal development in a skill and physical pursuit, and an expedition 
+
+- title: Game of Life
+  links:
+  - url: gh!jda0/coms20001-gol2
+  langs: 
+  - xc
+  desc: Parallelised Conway's Game of Life
+  archived: true
+  svg: gol-mark
+  lastcommit: 12/16
+
+- div: 2015
+
+- title: Yatzi
+  links:
+  - url: gh!jda0/yatzi
+  langs: 
+  - js
+  desc: Dice Game for Mobile/Web
+  svg: yatzi-mark
+  lastcommit: 9/15
+
+- title: Flyt
+  links:
+  - url: gh!jda0/flyt-redis
+    title: Repo (Redis)
+  - url: gh!jda0/flyt-sqlite
+    title: (SQL)
+  langs: 
+  - coffee
+  - node
+  - nosql
+  - sql
+  desc: Behaviour and competition tracking for youth groups
+  archived: true
+  svg: flyt-mark
+  lastcommit: 7/15
+
+- title: NCO
+  links:
+  - url: gh!jda0/nco-1
+    title: Repo (Meteor)
+  - url: gh!jda0/nco-2
+    title: (Cloudant)
+  - url: gh!jda0/supernco
+    title: (Neo4j)
+  langs: 
+  - coffee
+  - node
+  - nosql
+  desc: Youth group management tool
+  svg: nco-mark
+  archived: true
+  lastcommit: 5/15
+
+- title: NCO for Slack
+  links:
+  - url: gh!jda0/nco-3
+  langs: 
+  - coffee
+  desc: Slackbot for NCO
+  archived: true
+  svg: slack-mark
+  lastcommit: 8/15
+
+- title: Explorer
+  links:
+  - url: gh!jda0/explorer
+  langs: 
+  - coffee
+  desc: Puzzle Game
+  svg: explorer-mark
+  lastcommit: 2/15
+
+- title: Farkle
+  links:
+  - url: gh!jda0/farkle
+  langs: 
+  - coffee
+  - node
+  desc: Multiplayer Dice Game
+  svg: farkle-mark
+  lastcommit: 1/15
+
+- div: 2014
+
+- title: Raleigh International Volunteer
+  desc: Procured sponsorship from Rotary International and BDO Accountancy, built a school comodor for an indigenous community, and completed a 50mi hike

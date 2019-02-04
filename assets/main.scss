@@ -1,0 +1,239 @@
+---
+---
+
+@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css");
+@import url('https://rsms.me/inter/inter-ui.css');
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --base00: #000;
+  --base01: #111;
+  --base02: #1d414d;
+  --base03: #333;
+  --base04: #444;
+  --base05: #666;
+  --base06: #aaa;
+  --base07: #eee;
+  --base08: #d88568;
+  --base09: #d86868;
+  --base0A: #b99353;
+  --base0B: #83a471;
+  --base0C: #7c9cae;
+  --base0D: #8eccdd;
+  --base0E: #b98eb2;
+  --base0F: #8b6c37;
+}
+
+html {
+  background-color: var(--base01);
+  color: var(--base07);
+  font-family: 'Inter UI', sans-serif;
+  font-feature-settings: 'calt' 1, 'dlig' 1;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+*::selection {
+  color: var(--base07);
+  background-color: var(--base02);
+}
+
+body {
+  overflow-x: hidden;
+  padding-bottom: 1.4em;
+}
+
+body > * {
+  margin: 0;
+  padding-left: 1.4rem;
+  padding-right: 1.4rem;
+}
+
+header {
+  padding-top: 3.5rem;
+  padding-bottom: 2.1rem;
+}
+
+main {
+  background-color: var(--base00);
+  padding-top: 3.5rem;
+  padding-bottom: 0.7rem;
+}
+
+footer {
+  color: var(--base03);
+  padding-top: 2.8rem;
+  padding-bottom: 0rem;
+}
+
+strong {
+  font-weight: 600;
+}
+
+header > *,
+main > *,
+footer > * {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 39rem;
+}
+
+a {
+  color: var(--base0D);
+  text-decoration: none;
+}
+
+@supports (font-variation-settings: normal) {
+  html { font-family: 'Inter UI var alt', sans-serif; }
+}
+
+svg {
+  display: unset;
+}
+
+i {
+  margin-right: .25em;
+}
+
+i svg {
+  color: currentColor;
+  fill: currentColor;
+  height: 1em;
+  margin-top: -.125em;
+  opacity: .75;
+  vertical-align: middle;
+}
+
+.mark svg {
+  color: var(--base07);
+  height: 2em;
+}
+
+.card .mark {
+  margin-left: -2.25em;
+  margin-right: .5625em;
+  overflow: visible;
+}
+
+.card .mark svg {
+  height: 1.4em;
+}
+
+section {
+  margin-bottom: 4.2rem;
+  margin-top: 2.8rem;
+}
+
+p,
+dl,
+ol,
+ul {
+  margin-bottom: 1.4rem;
+  margin-top: 1.4rem;
+}
+
+p.card {
+  margin-top: 2.8rem;
+  margin-bottom: 2.8rem;
+}
+
+ul.inline {
+  list-style: none;
+  margin-top: -0.7rem;
+  padding-left: 0;
+}
+
+ul.inline li {
+  display: inline-block;
+  margin: 0.7rem 1.5rem 0 0;
+  text-indent: 0;
+  white-space: nowrap;
+}
+
+ul.inline li i svg {
+  color: var(--base02);
+  fill: var(--base02);
+  opacity: 1;
+}
+
+ul.inline li a {
+  text-decoration: none;
+}
+
+.desc {
+  color: var(--base05);
+}
+
+.tags {
+  color: var(--base04);
+}
+
+.big {
+  font-size: 1.25rem;
+}
+
+.bold strong {
+  font-size: 1.25rem;
+  background-color: var(--base0E);
+  color: var(--base00);
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+}
+
+.shy {
+  color: var(--base02);
+}
+
+.b {
+  white-space: initial;
+}
+
+.nb {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -0.7rem;
+  margin-right: -0.7rem;
+}
+
+.col,
+[class^='col'] {
+  max-width: 100%;
+  flex-basis: 1;
+  flex-grow: 1;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0.7rem;
+  padding-right: 0.7rem;
+  position: relative;
+  width: 100%;
+}
+
+@media (min-width: 30rem) {
+  .col,
+  [class^='col'] {
+    flex-basis: 0;
+  }
+
+  .col-auto {
+    flex: 0 0 auto;
+    width: auto;
+  }
+
+  .col-2 {
+    flex: 0 0 16.666666%;
+    max-width: 16.666666%;
+  }
+}
+
+.bump {
+  margin-top: -1.625rem;
+  margin-left: 2.5rem;
+}

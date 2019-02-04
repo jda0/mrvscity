@@ -1,0 +1,136 @@
+---
+title: mrvs
+author: James Daly
+email: j.daly.2015@my.bristol.ac.uk
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{{ page.title }}</title>
+  
+  <link rel="stylesheet" href="/assets/main.css">
+</head>
+<body>
+  <header>
+    <section class="mark">
+      {% include mark.svg %}
+    </section>
+    <section>
+      <p class="bold">
+        I am a student, outreach ambassador and developer.<br>
+        I <strong>design</strong> and <strong>implement</strong> well-considered and maintainable experiences.<br>
+        I believe in <strong>consistency</strong>, <strong>accessibility</strong> and <strong>utility</strong>.<br>
+        I know that <strong>tomorrow</strong> is as <strong>important as today</strong>.<br>
+      </p>
+    </section>
+  </header>
+  <main>
+    <section>
+      <ul class="inline">
+        <li>
+            <i aria-hidden="true">{% include md-person.svg %}</i>
+            {{ page.author }}
+        </li>
+        <li>
+          <a href="mailto:{{ page.email }}">
+            <i aria-label="email" role="icon">{% include md-mail.svg %}</i>
+            {{ page.email }}
+          </a>
+        </li>
+        <br>
+        {%- for network in site.data.networks -%}
+        <li>
+          <a href="{{ network.url }}">
+            <i aria-label="{{ network.name }}" role="icon">{%- include {{ network.svg }}.svg -%}</i>
+            {{ network.username }}
+          </a>
+        </li>
+        {%- endfor -%}
+      </ul>
+    </section>
+    <section>
+      <div><div>
+    {% for repo in site.data.repos %}
+      {% if repo.div %}
+      </div></div>
+      </div>
+      <div class="row">
+        <div class="col-2 shy">
+          <p>
+            {{ repo.div }} &mdash;
+          </p>
+        </div>
+        <div class="col">
+          <div class="bump">
+          {% else %}
+            <p class="card">
+              <span class="big">
+              {%- if repo.svg -%}
+                <i class="mark" aria-hidden="true">{% include {{ repo.svg }}.svg %}</i>
+              {% else %}
+                <i class="mark" aria-hidden="true">{% include nul-mark.svg %}</i>
+              {% endif %}
+                {{ repo.title }}
+              </span><br>
+              <span class="desc">
+                {{ repo.desc }}
+              </span><br>
+              <span class="tags">
+              {%- if repo.private -%}
+                <span class="mb"><i aria-hidden="true"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M4 13H3v-1h1v1zm8-6v7c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h1V4c0-2.2 1.8-4 4-4s4 1.8 4 4v2h1c.55 0 1 .45 1 1zM3.8 6h4.41V4c0-1.22-.98-2.2-2.2-2.2-1.22 0-2.2.98-2.2 2.2v2H3.8zM11 7H2v7h9V7zM4 8H3v1h1V8zm0 2H3v1h1v-1z"></path></svg></i>&nbsp;Private</span> &emsp;
+              {%- elsif repo.archived -%}
+                <span class="nb"><i aria-hidden="true"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 4.732v7.47c0 .45.3.84.75.97l6.5 1.73c.16.05.34.05.5 0l6.5-1.73c.45-.13.75-.52.75-.97v-7.47c0-.45-.3-.84-.75-.97l-6.5-1.74a1.4 1.4 0 0 0-.5 0l-6.5 1.74c-.45.13-.75.52-.75.97zm7 9.09l-6-1.59v-6.77l6 1.61v6.75zm-6-9.36l2.5-.67 6.5 1.73-2.5.67L2 4.463zm13 7.77l-6 1.59v-6.75l2-.55v2.44l2-.53v-2.44l2-.53v6.77zm-2-7.24l-6.5-1.73 2-.53 6.5 1.73-2 .53z"></path></svg></i>&nbsp;Archived</span>&emsp;
+              {%- endif -%}
+
+              {%- if repo.links -%}
+              {%- capture links -%}
+              {%- for link in repo.links -%}
+                {%- capture link_title -%}
+                {%- if link.title -%}{{ link.title }}
+                {%- elsif link.url contains '//' -%}Link
+                {%- else -%}Repo{% endif %}
+                {%- endcapture -%}
+                , <a href="{% if link.url contains '//' %}{{ link.url }}{% elsif link.url contains 'gl!' %}https://gitlab.com/{{ link.url | remove_first: 'gl!' }}{% else %}https://github.com/{{ link.url | remove_first: 'gh!' }}{% endif %}" title="{{ link_title }}: {{ link.url | remove_first: '//' }}">{{ link_title }}</a>
+              {%- endfor -%}
+              {%- endcapture -%}
+
+                <i aria-label="links" role="icon">{%- include md-link.svg -%}</i>&nbsp;{{ links | remove_first: ', ' }}&emsp;
+              {%- endif -%}
+
+              {%- if repo.tag -%}
+                <span class="nb"><i aria-label="{{ repo.tag.type }}" role="icon"><svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 16 16">
+                  {% case repo.tag.type %}
+                    {% when 'organization' %}
+                      <path fill-rule="evenodd" d="M16 12.999c0 .439-.45 1-1 1H7.995c-.539 0-.994-.447-.995-.999H1c-.54 0-1-.561-1-1 0-2.634 3-4 3-4s.229-.409 0-1c-.841-.621-1.058-.59-1-3 .058-2.419 1.367-3 2.5-3s2.442.58 2.5 3c.058 2.41-.159 2.379-1 3-.229.59 0 1 0 1s1.549.711 2.42 2.088A6.78 6.78 0 0 1 10 8.999s.229-.409 0-1c-.841-.62-1.058-.59-1-3 .058-2.419 1.367-3 2.5-3s2.437.581 2.495 3c.059 2.41-.158 2.38-1 3-.229.59 0 1 0 1s3.005 1.366 3.005 4z"></path>
+                    {% when 'git-branch' %}
+                      <path fill-rule="evenodd" d="M10 5c0-1.11-.89-2-2-2a1.993 1.993 0 0 0-1 3.72v.3c-.02.52-.23.98-.63 1.38-.4.4-.86.61-1.38.63-.83.02-1.48.16-2 .45V4.72a1.993 1.993 0 0 0-1-3.72C.88 1 0 1.89 0 3a2 2 0 0 0 1 1.72v6.56c-.59.35-1 .99-1 1.72 0 1.11.89 2 2 2 1.11 0 2-.89 2-2 0-.53-.2-1-.53-1.36.09-.06.48-.41.59-.47.25-.11.56-.17.94-.17 1.05-.05 1.95-.45 2.75-1.25S8.95 7.77 9 6.73h-.02C9.59 6.37 10 5.73 10 5zM2 1.8c.66 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2C1.35 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2zm0 12.41c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm6-8c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path>
+                    {% when 'git-pull-request' %}
+                      <path fill-rule="evenodd" d="M11 11.28V5c-.03-.78-.34-1.47-.94-2.06C9.46 2.35 8.78 2.03 8 2H7V0L4 3l3 3V4h1c.27.02.48.11.69.31.21.2.3.42.31.69v6.28A1.993 1.993 0 0 0 10 15a1.993 1.993 0 0 0 1-3.72zm-1 2.92c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zM4 3c0-1.11-.89-2-2-2a1.993 1.993 0 0 0-1 3.72v6.56A1.993 1.993 0 0 0 2 15a1.993 1.993 0 0 0 1-3.72V4.72c.59-.34 1-.98 1-1.72zm-.8 10c0 .66-.55 1.2-1.2 1.2-.65 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path>
+                    {% when 'git-merge' %}
+                      <path fill-rule="evenodd" d="M10 7.01c-.73 0-1.38.41-1.73 1.02v-.02C7.22 7.99 6 7.65 5.14 6.99c-.75-.58-1.5-1.61-1.89-2.44A1.993 1.993 0 0 0 2 1C.89 1 0 1.9 0 3.01a2 2 0 0 0 1 1.72v6.56c-.59.35-1 .99-1 1.72 0 1.11.89 2 2 2a1.993 1.993 0 0 0 1-3.72V7.68c.67.7 1.44 1.27 2.3 1.69.86.42 2.03.63 2.97.64v-.02c.36.61 1 1.02 1.73 1.02 1.11 0 2-.89 2-2 0-1.11-.89-2-2-2zm-6.8 6c0 .66-.55 1.2-1.2 1.2-.65 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2zM2 4.21c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm8 6c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path>
+                  {% endcase %}
+                  </svg></i>&nbsp;<a href="{% if repo.tag.url contains 'gl!' %}https://gitlab.com/{{ repo.tag.url | remove_first: 'gl!' }}{% else %}https://github.com/{{repo.tag.url}}{% endif %}" title="{{site.data.maps.tags[repo.tag.type]}} {{repo.tag.title}}">{{repo.tag.title}}</a></span></a>&emsp;
+              {%- endif -%}
+
+              {%- if repo.langs -%}
+                {%- capture langs -%}
+                {%- for lang in repo.langs -%}, {% if site.data.maps.langs[lang] %}{{ site.data.maps.langs[lang] }}{% else %}{{ lang }}{% endif %}{%- endfor -%}
+                {%- endcapture -%}
+                <span class="nb"><i aria-label="tags" role="icon">{%- include md-pricetag.svg -%}</i>&nbsp;<span class="b">{{ langs | remove_first: ', ' }}</span></span>&emsp;
+              {% endif %}
+              </span>
+            </p>
+          {%- endif -%}
+        {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
+</body>
+</html>

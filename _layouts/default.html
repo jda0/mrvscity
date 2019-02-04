@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ page.title }}</title>
+        
+    <link rel="stylesheet" href="/assets/main.css">
+  </head>
+  <body>
+    <main>
+      <section class="mark">
+        <a href="/">{% include mark.svg %}</a>
+      </section>
+
+      <section>
+        <article>
+          <h1>{{ page.title | escape }}</h1>
+          <h3 class="fade">{{ page.date | date: "%A, %e %B %Y" }}</h3>
+          
+          {{ content }}
+        </article>
+      </section>
+      
+    {%- if page.comments != false and site.disqus.shortname and jekyll.environment == "production" -%}
+      <div class="grid">
+        <div class="l8">
+          <div id="disqus_thread"></div>
+        </div>
+      </div>
+      <script>
+        var disqus_config = function () {
+          this.page.url = '{{ page.url | absolute_url }}';
+          this.page.identifier = '{{ page.url | absolute_url }}';
+        };
+        (function() {
+          var d = document, s = d.createElement('script');
+          s.src = 'https://{{ site.disqus.shortname }}.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    {%- endif -%}
+    </main>
+  </body>
+</html>

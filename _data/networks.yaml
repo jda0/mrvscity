@@ -1,0 +1,31 @@
+- name: 'webring'
+  username: 'webring'
+  url: 'http://webring.xxiivv.com/'
+  class: 'webring'
+  svg: 'webring-mark'
+
+- name: 'messenger'
+  username: '0jda0'
+  url: '//m.me/0jda0'
+  svg: 'messenger-mark'
+  color1: 209
+
+- name: 'twitter'
+  username: 'jda0_'
+  url: '//twitter.com/jda0_'
+  svg: 'twitter-mark'
+
+- name: 'github'
+  username: 'jda0'
+  url: '//github.com/jda0'
+  svg: 'github-mark'
+
+- name: 'linkedin'
+  username: 0jda0
+  url: '//linkedin.com/in/0jda0'
+  svg: 'linkedin-logo'
+
+- name: 'resume'
+  username: resume
+  url: 'assets/cv1810.pdf'
+  svg: 'md-cloud-download'

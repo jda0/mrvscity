@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" xml:space="preserve">
+	<style type="text/css">
+		.st0{opacity:0.9;}
+		.st1{opacity:0.2;}
+		.st2{opacity:0.5;}
+		.st3{opacity:0.35;}
+		.st4{opacity:0.75;}
+		.st5{opacity:0.6;}
+		.st6{opacity:0.1;}
+	</style>
+	<circle class="st0" cx="37.5" cy="112.5" r="36"/>
+	<circle class="st1" cx="187.5" cy="187.5" r="36"/>
+	<circle cx="262.5" cy="187.5" r="36"/>
+	<circle class="st2" cx="37.5" cy="187.5" r="36"/>
+	<circle class="st3" cx="112.5" cy="112.5" r="36"/>
+	<circle class="st4" cx="112.5" cy="187.5" r="36"/>
+	<circle class="st5" cx="187.5" cy="112.5" r="36"/>
+	<path class="st6" d="M262.5,82.5c16.6,0,30,13.4,30,30s-13.4,30-30,30s-30-13.4-30-30S245.9,82.5,262.5,82.5 M262.5,76.5
+		c-19.9,0-36,16.1-36,36s16.1,36,36,36s36-16.1,36-36S282.4,76.5,262.5,76.5z"/>
+</svg>

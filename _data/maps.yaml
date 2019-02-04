@@ -1,0 +1,23 @@
+langs:
+  arduino: Arduino
+  aws: AWS
+  coffee: CoffeeScript
+  cpp: C++
+  js: JavaScript
+  node: Node.js
+  nosql: NoSQL
+  py: Python
+  react: React
+  rn: React Native
+  scss: SCSS
+  sql: SQL
+  tf: TensorFlow
+  ux: UI/UX
+  web: HTML5/CSS3
+  xc: XC
+
+tags:
+  organization: 'Organization:'
+  git-merge: Merged PR into
+  git-pull-request: Pull Request made to
+  git-branch: Branch of
