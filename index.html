@@ -92,9 +92,11 @@ email: j.daly.2015@my.bristol.ac.uk
                 {%- capture link_title -%}
                 {%- if link.title -%}{{ link.title }}
                 {%- elsif link.url contains '//' -%}Link
-                {%- else -%}Repo{% endif %}
+                {%- elsif link.url contains 'gh!' -%}Repo
+                {%- elsif link.url contains 'gl!' -%}Repo
+                {%- else -%}Link{%- endif -%}
                 {%- endcapture -%}
-                , <a href="{% if link.url contains '//' %}{{ link.url }}{% elsif link.url contains 'gl!' %}https://gitlab.com/{{ link.url | remove_first: 'gl!' }}{% else %}https://github.com/{{ link.url | remove_first: 'gh!' }}{% endif %}" title="{{ link_title }}: {{ link.url | remove_first: '//' }}">{{ link_title }}</a>
+                , <a href="{% if link.url contains '//' %}{{ link.url }}{% elsif link.url contains 'gl!' %}https://gitlab.com/{{ link.url | remove_first: 'gl!' }}{% elsif link.url contains 'gh!' %}https://github.com/{{ link.url | remove_first: 'gh!' }}{% else %}{{ link.url }}{% endif %}" title="{{ link_title }}: {{ link.url | remove_first: '//' }}">{{ link_title }}</a>
               {%- endfor -%}
               {%- endcapture -%}
 
