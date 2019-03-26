@@ -16,8 +16,8 @@
 
       <section>
         <article>
-          <h1>{{ page.title | escape }}</h1>
-          <h3 class="fade">{{ page.date | date: "%A, %e %B %Y" }}</h3>
+          <h1>{{ page.title }}</h1>
+          {%- unless page.nodate -%}<h3 class="fade">{{ page.date | date: "%A, %e %B %Y" }}</h3>{%- endunless -%}
           
           {{ content }}
         </article>

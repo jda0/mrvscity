@@ -237,3 +237,24 @@ ul.inline li a {
   margin-top: -1.625rem;
   margin-left: 2.5rem;
 }
+
+img {
+  display: inline-block;
+  max-width: 100%;
+  outline: 1px solid rgba(255, 255, 255, .36);
+  outline-offset: -1px;
+}
+
+img.halfwidth {
+  display: inline-block;
+  max-width: 32%;
+  max-width: calc(33.3333% - 0.36em);
+  margin-right: 0.36em;
+  margin-left: 0;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+svg {
+  fill: var(--base07);
+}
