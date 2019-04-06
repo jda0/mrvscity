@@ -231,11 +231,20 @@ ul.inline li a {
     flex: 0 0 16.666666%;
     max-width: 16.666666%;
   }
+
+  .col-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
 }
 
 .bump {
-  margin-top: -1.625rem;
   margin-left: 2.5rem;
+}
+
+.bump,
+.bumpy {
+  margin-top: -1.625rem;
 }
 
 img {
