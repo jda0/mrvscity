@@ -33,7 +33,7 @@ We assist with a triannual event, Digimakers, which attracts over 400 young peop
 ---
 {: .invisible}
 
-{% include changemakers.svg %}{: .halfwidth}
+{% include changemakers.svg %}{: .halfwidth .fill}
 
 In July 2019, in collaboration with the Jean Golding Institute and with support from the Turing Institute and local businesses like Potato, Ghyston and Just Eat, we are launching a new annual initiative called Changemakers: an event that aims to break down stereotypes and highlight the excellent opportunities available to young women interested in a career in the tech industry. Over an exciting four days of skills development, inspiring seminars and industry insight, teams will work together to develop a piece of technology to support a social or ecological campaign. This opportunity is open to students from years 9-12, and participants do not need previous programming experience to take part. 
 
@@ -42,6 +42,6 @@ We are living in uncertain times: it is more important than ever that young wome
 ---
 {: .invisible}
 
-{% include sponsors-horiz.svg %}
+{% include sponsors-horiz.svg %}{: .fill}
 
 In 2018/19, University of Bristol Computer Science Society's Gold Sponsors are Bloomberg, Cookpad, Dyson and Just Eat, and our Silver Sponsor is Jump Trading. We are a Bristol SU society, a registered charity in England and Wales #1139656.

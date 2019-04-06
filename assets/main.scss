@@ -135,7 +135,7 @@ ul {
   margin-top: 1.4rem;
 }
 
-p.card {
+.card {
   margin-top: 2.8rem;
   margin-bottom: 2.8rem;
 }
@@ -264,7 +264,7 @@ img {
   max-width: calc(33.3333% - 0.36em);
 }
 
-svg {
+svg .fill {
   fill: var(--base07);
 }
 
@@ -280,4 +280,18 @@ hr {
 
 hr.invisible {
   opacity: 0;
+}
+
+.fl {
+  float: left;
+  margin-right: 2.1em;
+}
+
+.fr {
+  float: right;
+  margin-left: 2.1em;
+}
+
+.cb {
+  clear: both;
 }
