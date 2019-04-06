@@ -140,6 +140,10 @@ ul {
   margin-bottom: 2.8rem;
 }
 
+ul {
+  padding-left: 1em;
+}
+
 ul.inline {
   list-style: none;
   margin-top: -0.7rem;
@@ -283,8 +287,8 @@ svg .fill {
 
 hr {
   border: 0.5px solid var(--base07);
-  margin-bottom: 2.1em;
-  margin-top: 2.1em;
+  margin-bottom: 2.1rem;
+  margin-top: 2.1rem;
 }
 
 hr.invisible {
@@ -293,14 +297,18 @@ hr.invisible {
 
 .fl {
   float: left;
-  margin-right: 2.1em;
+  margin-right: 2.1rem;
 }
 
 .fr {
   float: right;
-  margin-left: 2.1em;
+  margin-left: 2.1rem;
 }
 
 .cb {
   clear: both;
+}
+
+.xpadb {
+  padding-bottom: 1.4rem;
 }

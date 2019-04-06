@@ -23,12 +23,12 @@ comments: false
 
       <section>
         <article>
-          <h1>{{ page.title }}</h1>
+          <h1 class="xpadb">{{ page.title }}</h1>
           {%- unless page.nodate -%}<h3 class="fade">{{ page.date | date: "%A, %e %B %Y" }}</h3>{%- endunless -%}
           
-          <div><div>
+          <!-- <div><div> -->
         {% for attire in site.data.vectorattire %}
-          {% if attire.div %}
+          <!-- {% if attire.div %}
           </div></div>
           </div>
           <div class="row">
@@ -39,9 +39,9 @@ comments: false
             </div>
             <div class="col">
               <div class="bumpy">
-              {% else %}
+              {% else %} -->
                 <div class="row card">
-                  <div class="col-4">
+                  <div class="col-4" style="margin-top: -.5em;">
                   {% if attire.svg %}
                     {% include vectorattire/{{ attire.svg }}.svg %}</i>
                   {% endif %}
@@ -57,11 +57,11 @@ comments: false
                     </ul>
                   </div>
                 </div>
-              {% endif %}
+              <!-- {% endif %} -->
             {% endfor %}
-              </div>
+              <!-- </div>
             </div>
-          </div>
+          </div> -->
         </article>
       </section>
     </main>
