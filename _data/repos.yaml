@@ -32,6 +32,13 @@
     Award for extra-curricular development endorsed by companies and professional bodies like Accenture, BAE Systems and ICAEW
   lastcommit: 8/19
 
+- title: Vectorattire
+  links:
+  - url: /vectorattire
+  desc: A daily gallery of what I'm wearing
+  svg: md-accessibility
+  lastcommit: 4/19
+
 - div: 2018
 
 - title: Takon.me

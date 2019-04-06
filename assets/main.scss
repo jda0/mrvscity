@@ -2,7 +2,7 @@
 ---
 
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css");
-@import url('https://rsms.me/inter/inter-ui.css');
+@import url('https://indestructibletype.com/fonts/Jost.css');
 
 * {
   box-sizing: border-box;
@@ -30,7 +30,7 @@
 html {
   background-color: var(--base01);
   color: var(--base07);
-  font-family: 'Inter UI', sans-serif;
+  font-family: 'Jost', sans-serif;
   font-feature-settings: 'calt' 1, 'dlig' 1;
   font-weight: 300;
   line-height: 1.4;
@@ -86,9 +86,9 @@ a {
   text-decoration: none;
 }
 
-@supports (font-variation-settings: normal) {
-  html { font-family: 'Inter UI var alt', sans-serif; }
-}
+// @supports (font-variation-settings: normal) {
+//   html { font-family: 'Inter UI var alt', sans-serif; }
+// }
 
 svg {
   display: unset;
