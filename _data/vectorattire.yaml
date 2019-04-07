@@ -53,12 +53,12 @@ log:
 
 wardrobe:
   iniki:
-    desc: ADIDAS Pureboost &mdash; Collegiate Navy
+    desc: ADIDAS I-5923 Pride Pack (2018)
     svg:
       - type: shoe
         fill: '#fcf'
   pureboost:
-    desc: ADIDAS I-5923 Pride Pack (2018)
+    desc: ADIDAS Pureboost &mdash; Collegiate Navy
     svg:
       - type: shoe
         fill: '#262262'
