@@ -1,0 +1,218 @@
+---
+title: Logs
+author: James Daly
+email: j.daly.2015@my.bristol.ac.uk
+comments: false
+---
+
+{% assign logs = site.data.logs %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ page.title }}</title>
+        
+    <link rel="stylesheet" href="/assets/main.css">
+  </head>
+  <body>
+    <main>
+      <section class="mark">
+        <a href="/">{% include mark.svg %}</a>
+      </section>
+
+      <section>
+        <article>
+          <h1>{{ page.title }}</h1>
+
+      {%- for log in logs -%}
+          <h3>{{ log[0] }}</h3>
+
+          <div class="data" data-log="{{ log[0] }}">
+        {%- for day in log[1] -%}
+          <input type="checkbox" title="{{ day[0] }}" {% if day[1] %}checked{% endif %} disabled />
+        {%- endfor -%}
+          </div>
+      {%- endfor -%}
+
+        </article>
+      </section>
+      <section>
+        <div id="saveParent"/>
+      </section>
+    </main>
+
+    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script async type="text/javascript">
+      let data = {
+      {%- for log in logs -%}
+        '{{ log[0] }}': {
+        {%- for day in log[1] -%}
+          '{{ day[0] }}': {{ day[1] }},
+        {%- endfor -%}
+        },
+      {%- endfor -%}
+      }
+
+      const dt = new Date()
+      const ds = '' + dt.getUTCFullYear() + ('00' + (dt.getUTCMonth() + 1)).slice(-2) + ('00' + dt.getUTCDate()).slice(-2)
+
+      let eque = []
+      let savable = {}
+
+      const deque = () => {
+        let e = eque.shift()
+        console.log('deque', e)
+        let log = e.target.parentNode.getAttribute('data-log')
+        let item = e.target.getAttribute('title')
+        let user = netlifyIdentity.currentUser()
+
+        if (/*user && */e.set) {
+          for (let setop in e.set) {
+            if (typeof e.set[setop] === 'boolean') {
+              e.target[setop] = e.set[setop]
+              if (!savable[log]) savable[log] = {}
+              if (typeof savable[log][item] === 'undefined') savable[log][item] = e.set[setop]
+              else if (!e.force) {
+                delete savable[log][item]
+                if (!Object.keys(savable[log]).length) delete savable[log]
+              }
+            } else {
+              console.error('unknown setop', e)
+            }
+          }
+        } else if (!user && e.unset) {
+          for (let setop in e.unset) {
+            if (typeof e.unset[setop] === 'boolean') {
+              e.target[setop] = e.unset[setop]
+            } else {
+              console.error('unknown unsetop', e)
+            }
+          }
+        }
+
+        e.target.indeterminate = false
+        updateSavable(savable, data)
+      }
+
+      const save = async (data, updates) => {
+        let data2 = { ...data }
+        for (const key in updates) data2[key] = {
+          ...data2[key],
+          ...updates[key]
+        }
+
+        console.log('save', data2)
+
+        // let res = await fetch('https://mrvs.city/.netlify/git/github/refs/heads/master')
+        // const ref = res.json()
+
+        // if (!ref.object || ref.object.type !== 'commit' || !ref.object.sha) throw `bad ref heads/master`
+
+        // let res = await fetch(`https://mrvs.city/.netlify/git/github/commits/${ref.object.sha}`)
+        // const commit = res.json()
+
+        // if (!commit.tree || !commit.tree.sha) throw `bad commit ${ref.object.sha}`
+
+        // let res = await fetch(`https://mrvs.city/.netlify/git/github/trees/${ref.tree.sha}`)
+        // const tree = res.json()
+
+        // if (!tree.tree) throw `bad tree ${commit.tree.sha}`
+        // const dir = tree.tree.find(e => e.path === '_data' && e.type === 'tree')
+        // if (!dir) throw `_data not found ${tree.sha}`
+
+        // let res = await fetch(`https://mrvs.city/.netlify/git/github/trees/${dir.sha}`)
+        // const tree_ = res.json()
+
+        // if (!tree_.tree) throw `bad tree ${tree.sha}`
+        // const file = tree_.tree.find(e => e.path === 'logs.yaml' && e.type === 'blob')
+        // if (!file) throw `logs.yaml not found ${tree_.sha}`
+
+        // let res = await fetch(`https://mrvs.city/.netlify/git/github/blobs/${file.sha}`)
+        // const blob = res.json()
+
+        // if (!blob.contents) throw `bad blob ${file.sha}`
+        // const data = btoa(blob.contents)
+
+        return data2
+      }
+      
+      const updateSavable = (updates, data) => {
+        let saveEl = document.getElementById('save')
+
+        if (Object.keys(updates).length && saveEl === null) {
+          saveEl = document.createElement('input')
+          saveEl.setAttribute('id', 'save')
+          saveEl.setAttribute('type', 'button')
+          saveEl.setAttribute('value', 'Save')
+
+          saveEl.addEventListener('click', e => {
+            document.getElementById('saveParent').removeChild(saveEl)
+            save(data, updates)
+              .then(() => updates = {})
+              .catch(() => document.getElementById('saveParent').appendChild(saveEl))
+          })
+
+          document.getElementById('saveParent').appendChild(saveEl)
+        } else if (!Object.keys(savable).length && saveEl !== null) {
+          document.getElementById('saveParent').removeChild(saveEl)
+        }
+      }
+
+      netlifyIdentity.on('close', deque)
+
+      const checkcb = force => e => {
+        const user = netlifyIdentity.currentUser()
+        eque.push({
+          target: e.target,
+          set: { checked: !!e.target.checked },
+          unset: { checked: !e.target.checked },
+          force: !!force
+        })
+        
+        if (!user) netlifyIdentity.open()
+        else deque()
+
+        e.target.indeterminate = true
+      }
+
+      ;(() => {
+        ;[].forEach.call(document.querySelectorAll('.data'), el => {
+          if (!el.querySelector(`input[title="${ds}"]`)) {
+            missingEl = document.createElement('input')
+            missingEl.setAttribute('type', 'checkbox')
+            missingEl.setAttribute('title', ds)
+            missingEl.indeterminate = true
+            missingEl.addEventListener('change', checkcb(true))
+            el.insertBefore(missingEl, el.firstChild)
+          }
+        })
+
+        ;[].forEach.call(document.querySelectorAll('.data input'), el => {
+          if (!el.nextElementSibling) return
+          
+          let item = el.getAttribute('title')
+          let next = el.nextElementSibling.getAttribute('title')
+          item = new Date(item.slice(0, -4), parseInt(item.slice(-4, -2), 10) - 1, item.slice(-2))
+          next = new Date(next.slice(0, -4), parseInt(next.slice(-4, -2), 10) - 1, next.slice(-2))
+
+          while (item - next !== 86400000) {
+            missing = new Date(item.valueOf() - 86400000)
+            missingEl = document.createElement('input')
+            missingEl.setAttribute('type', 'checkbox')
+            missingEl.setAttribute('title', '' + missing.getUTCFullYear() + ('00' + (missing.getUTCMonth() + 1)).slice(-2) + ('00' + missing.getUTCDate()).slice(-2))
+            missingEl.indeterminate = true
+            missingEl.addEventListener('change', checkcb(true))
+            el.parentNode.insertBefore(missingEl, el.nextElementSibling)
+            item = missing
+          }
+        })
+        ;[].forEach.call(document.querySelectorAll(`.data input[title="${ds}"]`), el => {
+          el.removeAttribute('disabled')
+          el.addEventListener('change', checkcb())
+        })}
+      )()
+    </script>
+  </body>
+</html>
