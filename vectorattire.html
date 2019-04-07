@@ -27,7 +27,7 @@ comments: false
           {%- unless page.nodate -%}<h3 class="fade">{{ page.date | date: "%A, %e %B %Y" }}</h3>{%- endunless -%}
           
           <!-- <div><div> -->
-        {% for attire in site.data.vectorattire %}
+        {% for attire in site.data.vectorattire.log %}
           <!-- {% if attire.div %}
           </div></div>
           </div>
