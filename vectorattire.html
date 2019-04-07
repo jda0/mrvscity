@@ -50,11 +50,13 @@ comments: false
                     {%- assign items = attire.items | reverse -%}
                     {% for item in items %}
                       {% for path in site.data.vectorattire.wardrobe[item].svg %}
-                        {% if path.type %}
-                        <path d="{{ site.data.vectorattire.paths[path.type] }}" fill="{{ path.fill }}" />
-                        {% else %}
-                          <path d="{{ path.d }}" fill="{{ path.fill }}" />
-                        {% endif %}
+                      {% if path.type %}
+                        <path d="{{ site.data.vectorattire.paths[path.type] }}" fill="{{ path.fill }}">
+                      {% else %}
+                        <path d="{{ path.d }}" fill="{{ path.fill }}">
+                      {% endif %}
+                          <title>{{ site.data.vectorattire.wardrobe[item].desc }}</title>
+                        </path>
                       {% endfor %}
                     {% endfor %}
                     </svg>
