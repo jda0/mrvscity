@@ -106,36 +106,132 @@ comments: false
 
         console.log('save', data2)
 
-        let res = await fetch('https://mrvs.city/.netlify/git/github/git/refs/heads/master')
-        const ref = res.json()
+        let yaml = Object.keys(data2)
+          .reduce((a, k) => `${a}\n'${k}':\n${
+            Object.keys(data2[k])
+              .reduce((a, k2) => `  ${k2}: ${data2[k][k2]}\n${a}`, '')
+          }`, '')
+
+        console.log(`save :: rebuilt _data/logs.yaml: %c${yaml}`, 'color: #777')
+
+        const jwt = await netlifyIdentity.currentUser().jwt()
+        const headers = {
+          Authorization: `Bearer ${jwt}`,
+          'Content-Type': 'application/json',
+        }
+
+
+        console.log('save :: getting ref master...')
+        let res = await fetch('https://mrvs.city/.netlify/git/github/git/refs/heads/master', { headers })
+        const ref = await res.json()
 
         if (!ref.object || ref.object.type !== 'commit' || !ref.object.sha) throw `bad ref heads/master`
 
-        res = await fetch(`https://mrvs.city/.netlify/git/github/git/commits/${ref.object.sha}`)
-        const commit = res.json()
+        console.log(`save :: getting commit ${ref.object.sha}...`)
+        res = await fetch(`https://mrvs.city/.netlify/git/github/git/commits/${ref.object.sha}`, { headers })
+        const commit = await res.json()
 
         if (!commit.tree || !commit.tree.sha) throw `bad commit ${ref.object.sha}`
 
-        res = await fetch(`https://mrvs.city/.netlify/git/github/git/trees/${ref.tree.sha}`)
-        const tree = res.json()
+        console.log(`save :: getting tree ${commit.tree.sha} for commit...`)
+        res = await fetch(`https://mrvs.city/.netlify/git/github/git/trees/${commit.tree.sha}`, { headers })
+        const tree = await res.json()
 
         if (!tree.tree) throw `bad tree ${commit.tree.sha}`
         const dir = tree.tree.find(e => e.path === '_data' && e.type === 'tree')
         if (!dir) throw `_data not found ${tree.sha}`
 
-        res = await fetch(`https://mrvs.city/.netlify/git/github/git/trees/${dir.sha}`)
-        const tree_ = res.json()
+        console.log(`save :: getting subtree ${dir.sha} for _data/...`)
+        res = await fetch(`https://mrvs.city/.netlify/git/github/git/trees/${dir.sha}`, { headers })
+        const subtree = await res.json()
 
-        if (!tree_.tree) throw `bad tree ${tree.sha}`
-        const file = tree_.tree.find(e => e.path === 'logs.yaml' && e.type === 'blob')
-        if (!file) throw `logs.yaml not found ${tree_.sha}`
+        if (!subtree.tree) throw `bad tree ${tree.sha}`
+        const file = subtree.tree.find(e => e.path === 'logs.yaml' && e.type === 'blob')
+        if (!file) throw `logs.yaml not found ${subtree.sha}`
 
-        res = await fetch(`https://mrvs.city/.netlify/git/github/git/blobs/${file.sha}`)
-        const blob = res.json()
+        
+        console.log(`save :: creating new blob for logs...`)
+        res = await fetch(`https://mrvs.city/.netlify/git/github/git/blobs`, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({ content: yaml })
+        })
+        const new_blob = await res.json()
 
-        if (!blob.contents) throw `bad blob ${file.sha}`
-        const data_ = btoa(blob.contents)
-        console.log(data_)
+        if (!new_blob.sha) throw `bad new blob ${JSON.stringify(new_blob)}`
+        const new_subtree_content = {
+          base_tree: subtree.sha,
+          tree: [
+            ...subtree.tree.filter(e => e.path !== 'logs.yaml' || e.type !== 'blob'),
+            {
+              path: 'logs.yaml',
+              mode: '100644',
+              type: 'blob',
+              sha: new_blob.sha
+            }
+          ]
+        }
+
+        console.log(`save :: creating new subtree for _data/ with blob ${new_blob.sha}...`)
+        res = await fetch(`https://mrvs.city/.netlify/git/github/git/trees`, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify(new_subtree_content)
+        })
+        const new_subtree = await res.json()
+
+        if (!new_subtree.sha) throw `bad new tree ${JSON.stringify(new_subtree)}`
+        const new_tree_content = {
+          base_tree: tree.sha,
+          tree: [
+            ...tree.tree.filter(e => e.path !== '_data' || e.type !== 'tree'),
+            {
+              path: '_data',
+              mode: '040000',
+              type: 'tree',
+              sha: new_subtree.sha
+            }
+          ]
+        }
+
+        console.log(`save :: creating new tree for commit with blob ${new_blob.sha}...`)
+        res = await fetch(`https://mrvs.city/.netlify/git/github/git/trees`, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify(new_tree_content)
+        })
+        const new_tree = await res.json()
+
+        if (!new_tree.sha) throw `bad new tree ${JSON.stringify(new_tree)}`
+        const new_commit_content = {
+          message: '* Update logs [auto]',
+          tree: new_tree.sha,
+          parents: [commit.sha],
+          committer: {
+            name: 'mrvsbot',
+            email: 'bot@mrvs.city',
+            date: (new Date()).toISOString()
+          }
+        }
+
+        console.log(`save :: creating new commit for tree ${new_tree.sha}...`)
+        res = await fetch(`https://mrvs.city/.netlify/git/github/git/commits`, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify(new_commit_content)
+        })
+        const new_commit = await res.json()
+
+        if (!new_commit.sha) throw `bad new commit ${JSON.stringify(new_commit)}`
+        console.log(`save :: updating ref master for commit ${new_commit.sha}...`)
+        res = await fetch(`https://mrvs.city/.netlify/git/github/git/refs/heads/master`, {
+          method: 'PATCH',
+          headers,
+          body: JSON.stringify({ sha: new_commit.sha })
+        })
+        const new_ref = await res.json()
+
+        console.log('save :: done', new_ref)
 
         return data2
       }
@@ -155,7 +251,7 @@ comments: false
               document.getElementById('toolbar').removeChild(saveEl)
               save(data, savable)
                 .then(data2 => data = data2, savable = {})
-                .catch(() => document.getElementById('toolbar').appendChild(saveEl))
+                .catch(e => console.error(e), document.getElementById('toolbar').appendChild(saveEl))
             }
           })
 
