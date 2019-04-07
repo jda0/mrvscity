@@ -2,65 +2,135 @@
 
 log:
   - date: 07 April 2019
-    svg: 20190407
     items:
-      - ASOS DESIGN Sweatshirt &mdash; Pink
-      - UNIQLO Soft Touch Crew Neck Long-sleeve T-shirt &mdash; Black
-      - UNIQLO Men Fleece Lined Joggers &mdash; Navy
-      - UNIQLO Men Colour Socks &mdash; Red
-      - MUJI Organic Cotton Slip-On Sneakers &mdash; Black
+      - asosjumper_pink
+      - uniqlotee_black
+      - joggers_navy
+      - slipons_black
 
   - date: 06 April 2019
-    svg: 20190406
     items:
-      - NATIVE YOUTH Marine Kimono Jacket
-      - ASOS DESIGN Sweatshirt &mdash; Pink
-      - UNIQLO Soft Touch Crew Neck Long-sleeve T-shirt &mdash; Black
-      - UNIQLO Men Fleece Lined Joggers &mdash; Navy
-      - UNIQLO Men Colour Socks &mdash; Green
-      - MUJI Organic Cotton Slip-On Sneakers &mdash; Black
+      - kimono
+      - asosjumper_pink
+      - uniqlotee_black
+      - joggers_navy
+      - slipons_black
 
   - date: 05 April 2019
-    svg: 20190405
     items:
-      - HIPPO CAMPUS Bambi Tour Sweatshirt
-      - UNIQLO Soft Touch Crew Neck Long-sleeve T-shirt &mdash; Black
-      - Slim Jeans (Unbranded) &mdash; Black
-      - UNIQLO Men Colour Socks &mdash; Pink
-      - ADIDAS Pureboost &mdash; Collegiate Navy
+      - hippocampus
+      - uniqlotee_black
+      - jeans_black
+      - pureboost
 
   - date: 04 April 2019
-    svg: 20190404
     items:
-      - HIPPO CAMPUS Bambi Tour Sweatshirt
-      - UNIQLO Soft Touch Crew Neck Long-sleeve T-shirt &mdash; Black
-      - Slim Jeans (Unbranded) &mdash; Black
-      - UNIQLO Men Colour Socks &mdash; Orange
-      - ADIDAS Pureboost &mdash; Collegiate Navy
+      - hippocampus
+      - uniqlotee_black
+      - jeans_black
+      - pureboost
 
   - date: 03 April 2019
-    svg: 20190403
     items:
-      - HIPPO CAMPUS Bambi Tour Sweatshirt
-      - T-shirt (Unbranded) &mdash; Mint Green
-      - Slim Jeans (Unbranded) &mdash; Black
-      - UNIQLO Men Colour Socks &mdash; Blue
-      - ADIDAS I-5923 Pride Pack (2018)
+      - hippocampus
+      - csstee_mint
+      - jeans_black
+      - iniki
 
   - date: 02 April 2019
-    svg: 20190402
     items:
-      - ASOS DESIGN Sweatshirt &mdash; Pink
-      - UNIQLO UT &times; Michelin T-shirt
-      - Slim Jeans (Unbranded) &mdash; Black
-      - UNIQLO Men Colour Socks &mdash; Purple
-      - MUJI Organic Cotton Slip-On Sneakers &mdash; Black
+      - asosjumper_pink
+      - uniqlout_black
+      - jeans_black
+      - slipons_black
 
   - date: 01 April 2019
-    svg: 20190401
     items:
-      - RIVER ISLAND Chenille Jumper &mdash; Pink
-      - T-shirt (Unbranded) &mdash; Red
-      - UNIQLO EZY Jeans &mdash; Red
-      - UNIQLO Men Colour Socks &mdash; Gold
-      - ADIDAS Pureboost &mdash; Collegiate Navy
+      - jumper_chen
+      - tee_red
+      - ezyjeans_red
+      - pureboost
+
+wardrobe:
+  iniki:
+    desc: ADIDAS Pureboost &mdash; Collegiate Navy
+    svg:
+      - type: shoe
+        fill: '#fcf'
+  pureboost:
+    desc: ADIDAS I-5923 Pride Pack (2018)
+    svg:
+      - type: shoe
+        fill: '#262262'
+  slipons_black:
+    desc: MUJI Organic Cotton Slip-On Sneakers &mdash; Black
+    svg:
+      - type: shoe
+        fill: '#231f20'
+
+  jeans_black:
+    desc: Slim Jeans (Unbranded) &mdash; Black
+    svg:
+      - type: trouser
+        fill: '#231f20'
+  ezyjeans_red:
+    desc: UNIQLO EZY Jeans &mdash; Red
+    svg:
+      - type: trouser
+        fill: '#903'
+  joggers_navy:
+    desc: UNIQLO Men Fleece Lined Joggers &mdash; Navy
+    svg:
+      - type: trouser
+        fill: '#262262'
+
+  uniqlotee_black:
+    desc: UNIQLO Soft Touch Crew Neck Long-sleeve T-shirt &mdash; Black
+    svg: 
+      - type: tee
+        fill: '#231f20'
+  uniqlout_black:
+    desc: UNIQLO UT T-shirt &mdash; Black
+    svg: 
+      - type: tee
+        fill: '#231f20'
+  csstee_mint:
+    desc: CSS BRISTOL Event T-shirt &mdash; Mint Green
+    svg: 
+      - type: tee
+        fill: '#9fc'
+  tee_red:
+    desc: T-shirt (Unbranded) &mdash; Red
+    svg: 
+      - type: tee
+        fill: '#f06'
+
+  kimono:
+    desc: NATIVE YOUTH Marine Kimono Jacket
+    svg:
+      - type: cardigan
+        fill: '#339'
+  jumper_chen:
+    desc: RIVER ISLAND Chenille Jumper &mdash; Pink
+    svg:
+    - type: jumper
+      fill: '#ff5faa'
+  asosjumper_pink:
+    desc: ASOS DESIGN Sweatshirt &mdash; Pink
+    svg:
+      - type: jumper
+        fill: '#fcf'
+  hippocampus:
+    desc: HIPPO CAMPUS Bambi Tour Sweatshirt
+    svg:
+      - type: jumper
+        fill: '#231f20'
+      - d: M158.11,122.25a1,1,0,0,0,0,.25l.09.11s.09-.07.11-.12a.74.74,0,0,0,0-.21v-4.75a.4.4,0,0,1,.26-.46.93.93,0,0,0,.53-1.09,1.13,1.13,0,0,1-1.12,1.15,1.1,1.1,0,0,1-.7-.22V117l.86.28ZM160.6,121.49a.91.91,0,0,0-1.26-.12,1.31,1.31,0,0,0-.38.58,1,1,0,0,0,.39,1H156v.12a.81.81,0,0,0,.22.07h4.21a.6.6,0,0,0,.19-.06l-.1-.2A1,1,0,0,0,160.6,121.49Zm-.7,1.47a.82.82,0,1,1,.81-.83v0a.81.81,0,0,1-.77.85h0ZM140.54,123c.5-.56.54-1.09.14-1.49a.94.94,0,0,0-1.32,0c-.43.4-.41.92,0,1.48l-.11.17a1.13,1.13,0,0,0,.24.08h4.1a.73.73,0,0,0,.24-.07V123Zm-1.35-.87a.8.8,0,0,1,.84-.76h0A.82.82,0,0,1,140,123h0a.81.81,0,0,1-.81-.81v-.06ZM125.13,119.39v3.34c-.69-.52-1.19-.54-1.59-.12a.91.91,0,0,0,0,1.28,1.45,1.45,0,0,0,.62.31.92.92,0,0,0,.86-.34l.19.1a.86.86,0,0,0,.06-.23v-4.35Zm-.85,4.69a.82.82,0,0,1-.85-.79v0a.82.82,0,1,1,.81.82ZM176.44,115.77a1,1,0,0,0-1.41,0l0,0-.21-.14v4.59h.12a14.77,14.77,0,0,0,0-1.63V117a1,1,0,0,0,1.4.23l.12-.11A1,1,0,0,0,176.44,115.77Zm-.67,1.49a.82.82,0,1,1,.81-.83h0A.83.83,0,0,1,175.77,117.26ZM123.85,116.42v.08l.85.29v5.27h.15a2.16,2.16,0,0,0,0-.36v-4.78a.35.35,0,0,1,.21-.36,1,1,0,0,0,.61-1A1.16,1.16,0,0,1,123.85,116.42ZM175.45,117.91h-.13a.54.54,0,0,1-.06.3v4.31c0,.42,0,.78-.45,1a.74.74,0,0,0-.34.91,1.14,1.14,0,0,1,.63-1,1.17,1.17,0,0,1,1.17.11v-.12l-.86-.28ZM142,121.56a1.29,1.29,0,0,1,1.19.06,1.05,1.05,0,0,0-.36-.23.93.93,0,0,1-.47-.09v-4a9.11,9.11,0,0,0,0-1.28h-.17v5.08a.35.35,0,0,1-.21.36,1,1,0,0,0-.59,1A1.23,1.23,0,0,1,142,121.56ZM141.85,122.54h1.34a.66.66,0,0,0-.59-.71h0a.68.68,0,0,0-.72.64ZM124.51,119.34a.67.67,0,0,0-.71-.65h0v1.36a.7.7,0,0,0,.72-.68ZM157.75,121v-1.38a.7.7,0,0,0-.72.68h0a.69.69,0,0,0,.68.7ZM174.94,120.93a.68.68,0,1,0-.16,1.35.43.43,0,0,0,.16,0ZM157.76,122.1h-.93v.08h.93ZM174.05,116.9a1,1,0,0,0,0-.94ZM142.48,124.5a1,1,0,0,0,0-1ZM123.79,123.22v.07h.91v-.07Z
+        fill: '#fcf'
+
+paths:
+  shoe: M112.5,275a12.5,12.5,0,0,1,25,0ZM162.5,275a12.5,12.5,0,0,1,25,0Z
+  trouser: M112.5,187.5v79.22a15,15,0,0,1,25,0V200h25v66.72a15,15,0,0,1,25,0V187.5Z
+  tee: M150,97.5a10,10,0,0,0,9.7-7.6c-3.22.06-6.45.1-9.69.1s-6.48,0-9.71-.11A10,10,0,0,0,150,97.5Z
+  jumper: M256.25,75c-28.82,7.73-62,11.55-93.76,12.34v.16a12.5,12.5,0,0,1-25,0v-.16C105.77,86.55,72.57,82.73,43.75,75L37.5,100c23.25,6.25,50,10.38,75,12.5V185h75V112.5c25-2.12,51.75-6.25,75-12.5Z
+  cardigan: M131.48,84.65C99.33,83.41,69.22,79.24,44.4,72.59l-2.46-.66-7.46,29.85,2.37.63C63.52,109.58,91,113.09,110,114.79V212.5h30L133.77,84.74ZM258.06,71.93l-2.46.65c-24.86,6.66-55,10.84-87.06,12.07l-2.29.09L160,212.5h30V114.79c19.05-1.7,46.48-5.21,73.15-12.38l2.37-.63Z
