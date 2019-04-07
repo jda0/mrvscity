@@ -1,0 +1,5 @@
+'Activity':
+  type: boolean
+
+'Water':
+  type: number

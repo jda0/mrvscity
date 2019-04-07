@@ -6,6 +6,7 @@ comments: false
 ---
 
 {% assign logs = site.data.logs %}
+{% assign meta = site.data.logsmeta %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -26,17 +27,22 @@ comments: false
         <article>
           <h1>{{ page.title }}</h1>
 
-      {%- for log in logs -%}
+        {%- for log in logs -%}
+        {%- assign log0 = log[0] -%}
           <div class="card">
-            <h3>{{ log[0] }}</h3>
-
-            <div class="data" data-log="{{ log[0] }}">
+            <h3>{{ log0 }}</h3>
+            <div class="data" data-log="{{ log0 }}" data-type="{{ meta[log0].type }}">
           {%- for day in log[1] -%}
-            <input type="checkbox" title="{{ day[0] }}" {% if day[1] %}checked{% endif %} disabled />
+          {%- if meta[log0].type == 'boolean' -%}
+            <input type="checkbox" title="{{ day[0] }}" id="cb-{{log0}}-{{day[0]}}" {% if day[1] %}checked{% endif %} data-checked={{day[1]}} disabled
+            /><label for="cb-{{log0}}-{{day[0]}}" title="{{ day[0] }}"></label>
+          {%- elsif meta[log0].type == 'number' -%}
+            <input type="number" title="{{ day[0] }}" id="cb-{{log0}}-{{day[0]}}" value="{{day[1]}}" data-value="{{day[1]}}" disabled />
+          {%- endif -%}
           {%- endfor -%}
             </div>
           </div>
-      {%- endfor -%}
+        {%- endfor -%}
         </article>
       </section>
       <section>
@@ -64,7 +70,7 @@ comments: false
         let item = e.target.getAttribute('title')
         console.log('set', log, item, e)
         for (let setop in e.set) {
-          if (typeof e.set[setop] === 'boolean') {
+          // if (typeof e.set[setop] === 'boolean') {
             e.target[setop] = e.set[setop]
             if (!savable[log]) savable[log] = {}
             if (typeof savable[log][item] === 'undefined') savable[log][item] = e.set[setop]
@@ -72,20 +78,21 @@ comments: false
               delete savable[log][item]
               if (!Object.keys(savable[log]).length) delete savable[log]
             }
-          } else {
-            console.error('unknown setop', e)
-          }
+          // } else {
+          //   errorStatus('Unknown setop.', true, 'unknown setop', e)
+          // }
         }
       }
 
       const unset = (e) => {
         console.log('unset', e)
         for (let setop in e.unset) {
-          if (typeof e.unset[setop] === 'boolean') {
-            e.target[setop] = e.unset[setop]
-          } else {
-            console.error('unknown unsetop', e)
-          }
+          // if (typeof e.unset[setop] === 'boolean') {
+            if (e.unset[setop] === null) e.indeterminate = true
+            else e.target[setop] = e.unset[setop]
+          // } else {
+          //   errorStatus('Unknown unsetop.', true, 'unknown unsetop', e)
+          // }
         }
       }
 
@@ -104,9 +111,23 @@ comments: false
         updateSavable()
       }
 
-      const status = (message = netlifyIdentity.currentUser().email, ...extendedMessage) => {
+      let statusReset
+      const status = (message = netlifyIdentity.currentUser().email, reset = true, ...extendedMessage) => {
+        clearTimeout(statusReset)
+        
         if (message) document.getElementById('status').innerHTML = message
-        if (extendedMessage) console.log(extendedMessage)
+        if (extendedMessage) console.log(...extendedMessage)
+
+        if (reset) statusReset = setTimeout(status, 500)
+      }
+
+      const errorStatus = (message, reset = true, ...extendedMessage) => {
+        clearTimeout(statusReset)
+        
+        if (message) document.getElementById('status').innerHTML = message
+        if (extendedMessage) console.error(...extendedMessage)
+
+        if (reset) statusReset = setTimeout(status, 1500)
       }
 
       const save = async (data, updates) => {
@@ -116,7 +137,7 @@ comments: false
           ...updates[key]
         }
 
-        status('Saving', 'save', data2)
+        status('Saving', false, 'save', data2)
 
         let yaml = Object.keys(data2)
           .reduce((a, k) => `${a}\n'${k}':\n${
@@ -124,7 +145,7 @@ comments: false
               .reduce((a, k2) => `  ${k2}: ${data2[k][k2]}\n${a}`, '')
           }`, '')
 
-        status('Built YAML', `save :: rebuilt _data/logs.yaml: %c${yaml}`, 'color: #777')
+        status('Built YAML', false, `save :: rebuilt _data/logs.yaml: %c${yaml}`, 'color: #777')
 
         const jwt = await netlifyIdentity.currentUser().jwt()
         const headers = {
@@ -133,19 +154,19 @@ comments: false
         }
 
 
-        status('Getting master...', 'save :: getting ref master...')
+        status('Getting master...', false, 'save :: getting ref master...')
         let res = await fetch('https://mrvs.city/.netlify/git/github/git/refs/heads/master', { headers })
         const ref = await res.json()
 
         if (!ref.object || ref.object.type !== 'commit' || !ref.object.sha) throw `bad ref heads/master`
 
-        status('Getting HEAD...', `save :: getting commit ${ref.object.sha}...`)
+        status('Getting HEAD...', false, `save :: getting commit ${ref.object.sha}...`)
         res = await fetch(`https://mrvs.city/.netlify/git/github/git/commits/${ref.object.sha}`, { headers })
         const commit = await res.json()
 
         if (!commit.tree || !commit.tree.sha) throw `bad commit ${ref.object.sha}`
 
-        status('Getting tree...', `save :: getting tree ${commit.tree.sha} for commit...`)
+        status('Getting tree...', false, `save :: getting tree ${commit.tree.sha} for commit...`)
         res = await fetch(`https://mrvs.city/.netlify/git/github/git/trees/${commit.tree.sha}`, { headers })
         const tree = await res.json()
 
@@ -153,7 +174,7 @@ comments: false
         const dir = tree.tree.find(e => e.path === '_data' && e.type === 'tree')
         if (!dir) throw `_data not found ${tree.sha}`
 
-        status('Getting subtree...', `save :: getting subtree ${dir.sha} for _data/...`)
+        status('Getting subtree...', false, `save :: getting subtree ${dir.sha} for _data/...`)
         res = await fetch(`https://mrvs.city/.netlify/git/github/git/trees/${dir.sha}`, { headers })
         const subtree = await res.json()
 
@@ -162,7 +183,7 @@ comments: false
         if (!file) throw `logs.yaml not found ${subtree.sha}`
 
         
-        status('Creating blob...', `save :: creating new blob for logs...`)
+        status('Creating blob...', false, `save :: creating new blob for logs...`)
         res = await fetch(`https://mrvs.city/.netlify/git/github/git/blobs`, {
           method: 'POST',
           headers,
@@ -184,7 +205,7 @@ comments: false
           ]
         }
 
-        status('Creating subtree...', `save :: creating new subtree for _data/ with blob ${new_blob.sha}...`)
+        status('Creating subtree...', false, `save :: creating new subtree for _data/ with blob ${new_blob.sha}...`)
         res = await fetch(`https://mrvs.city/.netlify/git/github/git/trees`, {
           method: 'POST',
           headers,
@@ -206,7 +227,7 @@ comments: false
           ]
         }
 
-        status('Creating tree...', `save :: creating new tree for commit with blob ${new_blob.sha}...`)
+        status('Creating tree...', false, `save :: creating new tree for commit with blob ${new_blob.sha}...`)
         res = await fetch(`https://mrvs.city/.netlify/git/github/git/trees`, {
           method: 'POST',
           headers,
@@ -226,7 +247,7 @@ comments: false
           }
         }
 
-        status('Creating commit...', `save :: creating new commit for tree ${new_tree.sha}...`)
+        status('Creating commit...', false, `save :: creating new commit for tree ${new_tree.sha}...`)
         res = await fetch(`https://mrvs.city/.netlify/git/github/git/commits`, {
           method: 'POST',
           headers,
@@ -235,7 +256,7 @@ comments: false
         const new_commit = await res.json()
 
         if (!new_commit.sha) throw `bad new commit ${JSON.stringify(new_commit)}`
-        status('Updating HEAD...', `save :: updating ref master for commit ${new_commit.sha}...`)
+        status('Updating HEAD...', false, `save :: updating ref master for commit ${new_commit.sha}...`)
         res = await fetch(`https://mrvs.city/.netlify/git/github/git/refs/heads/master`, {
           method: 'PATCH',
           headers,
@@ -243,8 +264,7 @@ comments: false
         })
         const new_ref = await res.json()
 
-        status('Saved.', 'save :: done', new_ref)
-        setTimeout(() => status(), 500)
+        status('Saved.', true, 'save :: done', new_ref)
 
         return data2
       }
@@ -265,7 +285,10 @@ comments: false
               document.getElementById('toolbar').removeChild(saveEl)
               save(data, savable)
                 .then(data2 => data = data2, savable = {})
-                .catch(e => console.error(e), document.getElementById('toolbar').appendChild(saveEl))
+                .catch(e => {
+                  errorStatus('Save failed.', true, e)
+                  document.getElementById('toolbar').appendChild(saveEl)
+                })
             }
           })
 
@@ -301,10 +324,13 @@ comments: false
       netlifyIdentity.on('close', deque)
 
       const checkcb = force => e => {
+        const attribute = e.target.getAttribute('type') === 'checkbox' ? 'checked' : 'value'
+        const value = attribute === 'checked' ? !!e.target[attribute] : e.target[attribute]
+
         eque.push({
           target: e.target,
-          set: { checked: !!e.target.checked },
-          unset: { checked: !e.target.checked },
+          set: { [attribute]: value },
+          unset: { [attribute]: e.target.getAttribute(`data-${attribute}`) },
           force: !!force
         })
 
@@ -321,7 +347,7 @@ comments: false
         ;[].forEach.call(document.querySelectorAll('.data'), el => {
           if (!el.querySelector(`input[title="${ds}"]`)) {
             missingEl = document.createElement('input')
-            missingEl.setAttribute('type', 'checkbox')
+            missingEl.setAttribute('type', el.getAttribute('data-type') === 'boolean' ? 'checkbox' : el.getAttribute('data-type'))
             missingEl.setAttribute('title', ds)
             missingEl.indeterminate = true
             missingEl.addEventListener('change', checkcb(true))
@@ -329,11 +355,14 @@ comments: false
           }
         })
 
-        ;[].forEach.call(document.querySelectorAll('.data input'), el => {
-          if (!el.nextElementSibling) return
-          
+        ;[].forEach.call(document.querySelectorAll('.data input'), el => {          
           let item = el.getAttribute('title')
-          let next = el.nextElementSibling.getAttribute('title')
+
+          let nextEl = el.nextElementSibling
+          if (!nextEl) return
+          if (nextEl.tagName !== 'INPUT') nextEl = nextEl.nextElementSibling
+          if (!nextEl) return
+          let next = nextEl.getAttribute('title')
           item = new Date(item.slice(0, -4), parseInt(item.slice(-4, -2), 10) - 1, item.slice(-2))
           next = new Date(next.slice(0, -4), parseInt(next.slice(-4, -2), 10) - 1, next.slice(-2))
 

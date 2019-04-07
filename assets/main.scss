@@ -344,3 +344,60 @@ button {
 #toolbar > * {
   margin: 0.5em;
 }
+
+.data input {
+  background: none;
+  border: 1px solid;
+  border-radius: 9999px;
+  box-sizing: border-box;
+  color: var(--base07);
+  margin: 0 0.7em 0 0;
+  padding: 0 0.4em;
+  width: 3.7em;
+  height: 1.8em;
+  text-align: center;
+}
+
+.data input[type=number]::-webkit-inner-spin-button,
+.data input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.data input[type=checkbox] {
+  margin-right: 0;
+  opacity: 0;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.data input[type=checkbox] + label::before {
+  content: '';
+  cursor: 'pointer';
+  display: inline-block;
+  position: relative;
+  border: 1px solid;
+  border-radius: 9999px;
+  box-sizing: border-box;
+  color: var(--base07);
+  margin: 0 0.7em 0 -1.5em;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.data input:disabled,
+.data input[type=checkbox]:disabled + label::before {
+  color: var(--base05);
+}
+
+.data input[type=checkbox]:disabled:checked + label::before {
+  background: var(--base05);
+}
+
+.data input[type=checkbox]:checked + label::before {
+  background: var(--base07);
+}
+
+.data input[type=checkbox]:indeterminate + label::before {
+  background: var(--base05);
+}
