@@ -29,6 +29,12 @@
 
 html {
   background-color: var(--base01);
+}
+
+html,
+input,
+button,
+select {
   color: var(--base07);
   font-family: 'Jost', sans-serif;
   font-feature-settings: 'calt' 1, 'dlig' 1;
@@ -61,6 +67,8 @@ main {
   background-color: var(--base00);
   padding-top: 3.5rem;
   padding-bottom: 0.7rem;
+  min-height: 93.75vh;
+  min-height: calc(100vh - 1.4rem);
 }
 
 footer {
@@ -311,4 +319,28 @@ hr.invisible {
 
 .xpadb {
   padding-bottom: 1.4rem;
+}
+
+.admin {
+  color: var(--base0E);
+}
+
+input[type="button"],
+button {
+  background: none;
+  cursor: pointer;
+  border: 1px solid;
+  border-radius: 9999px;
+  padding: 0.4em 0.8em;
+}
+
+#toolbar {
+  text-align: right;
+  position: fixed;
+  top: 1em;
+  right: 1em;
+}
+
+#toolbar > * {
+  margin: 0.5em;
 }
