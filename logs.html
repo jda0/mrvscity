@@ -27,19 +27,20 @@ comments: false
           <h1>{{ page.title }}</h1>
 
       {%- for log in logs -%}
-          <h3>{{ log[0] }}</h3>
+          <div class="card">
+            <h3>{{ log[0] }}</h3>
 
-          <div class="data" data-log="{{ log[0] }}">
-        {%- for day in log[1] -%}
-          <input type="checkbox" title="{{ day[0] }}" {% if day[1] %}checked{% endif %} disabled />
-        {%- endfor -%}
+            <div class="data" data-log="{{ log[0] }}">
+          {%- for day in log[1] -%}
+            <input type="checkbox" title="{{ day[0] }}" {% if day[1] %}checked{% endif %} disabled />
+          {%- endfor -%}
+            </div>
           </div>
       {%- endfor -%}
-
         </article>
       </section>
       <section>
-        <div id="saveParent"/>
+        <div id="toolbar"/>
       </section>
     </main>
 
@@ -93,7 +94,7 @@ comments: false
         }
 
         e.target.indeterminate = false
-        updateSavable(savable, data)
+        updateSavable()
       }
 
       const save = async (data, updates) => {
@@ -105,76 +106,93 @@ comments: false
 
         console.log('save', data2)
 
-        // let res = await fetch('https://mrvs.city/.netlify/git/github/refs/heads/master')
-        // const ref = res.json()
+        let res = await fetch('https://mrvs.city/.netlify/git/github/git/refs/heads/master')
+        const ref = res.json()
 
-        // if (!ref.object || ref.object.type !== 'commit' || !ref.object.sha) throw `bad ref heads/master`
+        if (!ref.object || ref.object.type !== 'commit' || !ref.object.sha) throw `bad ref heads/master`
 
-        // let res = await fetch(`https://mrvs.city/.netlify/git/github/commits/${ref.object.sha}`)
-        // const commit = res.json()
+        res = await fetch(`https://mrvs.city/.netlify/git/github/git/commits/${ref.object.sha}`)
+        const commit = res.json()
 
-        // if (!commit.tree || !commit.tree.sha) throw `bad commit ${ref.object.sha}`
+        if (!commit.tree || !commit.tree.sha) throw `bad commit ${ref.object.sha}`
 
-        // let res = await fetch(`https://mrvs.city/.netlify/git/github/trees/${ref.tree.sha}`)
-        // const tree = res.json()
+        res = await fetch(`https://mrvs.city/.netlify/git/github/git/trees/${ref.tree.sha}`)
+        const tree = res.json()
 
-        // if (!tree.tree) throw `bad tree ${commit.tree.sha}`
-        // const dir = tree.tree.find(e => e.path === '_data' && e.type === 'tree')
-        // if (!dir) throw `_data not found ${tree.sha}`
+        if (!tree.tree) throw `bad tree ${commit.tree.sha}`
+        const dir = tree.tree.find(e => e.path === '_data' && e.type === 'tree')
+        if (!dir) throw `_data not found ${tree.sha}`
 
-        // let res = await fetch(`https://mrvs.city/.netlify/git/github/trees/${dir.sha}`)
-        // const tree_ = res.json()
+        res = await fetch(`https://mrvs.city/.netlify/git/github/git/trees/${dir.sha}`)
+        const tree_ = res.json()
 
-        // if (!tree_.tree) throw `bad tree ${tree.sha}`
-        // const file = tree_.tree.find(e => e.path === 'logs.yaml' && e.type === 'blob')
-        // if (!file) throw `logs.yaml not found ${tree_.sha}`
+        if (!tree_.tree) throw `bad tree ${tree.sha}`
+        const file = tree_.tree.find(e => e.path === 'logs.yaml' && e.type === 'blob')
+        if (!file) throw `logs.yaml not found ${tree_.sha}`
 
-        // let res = await fetch(`https://mrvs.city/.netlify/git/github/blobs/${file.sha}`)
-        // const blob = res.json()
+        res = await fetch(`https://mrvs.city/.netlify/git/github/git/blobs/${file.sha}`)
+        const blob = res.json()
 
-        // if (!blob.contents) throw `bad blob ${file.sha}`
-        // const data = btoa(blob.contents)
+        if (!blob.contents) throw `bad blob ${file.sha}`
+        const data_ = btoa(blob.contents)
+        console.log(data_)
 
         return data2
       }
       
-      const updateSavable = (updates, data) => {
+      const updateSavable = () => {
         let saveEl = document.getElementById('save')
 
-        if (Object.keys(updates).length && saveEl === null) {
+        if (Object.keys(savable).length && saveEl === null) {
           saveEl = document.createElement('input')
           saveEl.setAttribute('id', 'save')
           saveEl.setAttribute('type', 'button')
           saveEl.setAttribute('value', 'Save')
 
           saveEl.addEventListener('click', e => {
-            document.getElementById('saveParent').removeChild(saveEl)
-            save(data, updates)
-              .then(() => updates = {})
-              .catch(() => document.getElementById('saveParent').appendChild(saveEl))
+            if (!netlifyIdentity.currentUser()) netlifyIdentity.open()
+            else {
+              document.getElementById('toolbar').removeChild(saveEl)
+              save(data, savable)
+                .then(data2 => data = data2, savable = {})
+                .catch(() => document.getElementById('toolbar').appendChild(saveEl))
+            }
           })
 
-          document.getElementById('saveParent').appendChild(saveEl)
+          document.getElementById('toolbar').appendChild(saveEl)
         } else if (!Object.keys(savable).length && saveEl !== null) {
-          document.getElementById('saveParent').removeChild(saveEl)
+          document.getElementById('toolbar').removeChild(saveEl)
         }
       }
 
+      netlifyIdentity.on('login', () => {
+        logoutEl = document.createElement('input')
+        logoutEl.setAttribute('id', 'logout')
+        logoutEl.setAttribute('type', 'button')
+        logoutEl.setAttribute('value', `Logout ${netlifyIdentity.currentUser().email}`)
+
+        logoutEl.addEventListener('click', e => {
+          document.getElementById('toolbar').removeChild(logoutEl)
+          netlifyIdentity.logout()
+        })
+
+        document.getElementById('toolbar').insertBefore(logoutEl, document.getElementById('save'))
+        netlifyIdentity.close()
+      })
       netlifyIdentity.on('close', deque)
 
       const checkcb = force => e => {
-        const user = netlifyIdentity.currentUser()
         eque.push({
           target: e.target,
           set: { checked: !!e.target.checked },
           unset: { checked: !e.target.checked },
           force: !!force
         })
-        
-        if (!user) netlifyIdentity.open()
-        else deque()
 
         e.target.indeterminate = true
+        
+        if (!netlifyIdentity.currentUser()) netlifyIdentity.open()
+        else deque()
       }
 
       ;(() => {
