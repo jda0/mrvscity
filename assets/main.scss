@@ -345,13 +345,17 @@ button {
   margin: 0.5em;
 }
 
+.data {
+  margin-bottom: -0.7em;
+}
+
 .data input {
   background: none;
   border: 1px solid;
   border-radius: 9999px;
   box-sizing: border-box;
   color: var(--base07);
-  margin: 0 0.7em 0 0;
+  margin: 0 0.7em 0.7em 0;
   padding: 0 0.4em;
   width: 3.7em;
   height: 1.8em;
