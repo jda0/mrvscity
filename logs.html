@@ -79,11 +79,14 @@ comments: false
         for (let setop in e.set) {
           // if (typeof e.set[setop] === 'boolean') {
             e.target[setop] = e.set[setop]
-            if (!savable[log]) savable[log] = {}
-            if (typeof savable[log][item] === 'undefined') savable[log][item] = e.set[setop]
-            else if (!e.force) {
-              delete savable[log][item]
-              if (!Object.keys(savable[log]).length) delete savable[log]
+            if (!e.force && e.set[setop] === e.target.getAttribute(`data-${setop}`)) {
+              if (savable[log]) {
+                if (savable[log][item]) delete savable[log][item]
+                if (!Object.keys(savable[log]).length) delete savable[log]
+              }
+            } else {
+              if (!savable[log]) savable[log] = {}
+              savable[log][item] = e.set[setop]
             }
           // } else {
           //   errorStatus('Unknown setop.', true, 'unknown setop', e)
@@ -406,7 +409,7 @@ comments: false
           }
         })
 
-        ;[].forEach.call(document.querySelectorAll(`.data input[title="${ds}"]`), el => {
+        ;[].forEach.call(document.querySelectorAll(`.data input[title="${ds}"]:disabled`), el => {
           el.removeAttribute('disabled')
           el.addEventListener('change', checkcb())
         })}
