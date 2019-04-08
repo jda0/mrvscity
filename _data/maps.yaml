@@ -3,13 +3,16 @@ langs:
   aws: AWS
   coffee: CoffeeScript
   cpp: C++
+  git: Git
   js: JavaScript
+  liquid: Liquid
   node: Node.js
   nosql: NoSQL
   py: Python
   react: React
   rn: React Native
   scss: SCSS
+  svg: SVG/XML
   sql: SQL
   tf: TensorFlow
   ux: UI/UX

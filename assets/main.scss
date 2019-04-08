@@ -373,7 +373,7 @@ button {
 
 .data input[type=checkbox] + label::before {
   content: '';
-  cursor: 'pointer';
+  cursor: pointer;
   display: inline-block;
   position: relative;
   border: 1px solid;
@@ -388,6 +388,7 @@ button {
 .data input:disabled,
 .data input[type=checkbox]:disabled + label::before {
   color: var(--base05);
+  cursor: unset;
 }
 
 .data input[type=checkbox]:disabled:checked + label::before {
@@ -399,5 +400,6 @@ button {
 }
 
 .data input[type=checkbox]:indeterminate + label::before {
-  background: var(--base05);
+  background: none;
+  border: 0.25em solid var(--base06);
 }

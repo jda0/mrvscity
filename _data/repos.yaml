@@ -32,12 +32,29 @@
     Award for extra-curricular development endorsed by companies and professional bodies like Accenture, BAE Systems and ICAEW
   lastcommit: 8/19
 
+- title: Logs
+  links:
+  - url: /logs
+  desc: Trackers for various things like activity and hydration, with a static client-side CMS that updates the site through Netlify Git Gateway 
+  langs:
+  - git
+  - js
+  - liquid
+  - web
+  svg: md-accessibility
+  lastcommit: 4/19
+
 - title: Vectorattire
   links:
   - url: /vectorattire
   desc: A daily gallery of what I'm wearing
+  langs:
+  - liquid
+  - svg
+  - web
   svg: md-accessibility
   lastcommit: 4/19
+
 
 - div: 2018
 
@@ -73,6 +90,7 @@
   - arduino
   - cpp
   - js
+  - liquid
   - ux
   - web
   desc: A redesigned home, with new activities and learning resources, for the introduction to IoT and robotics used by 500+ children

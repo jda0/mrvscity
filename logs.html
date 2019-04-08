@@ -38,6 +38,8 @@ comments: false
             /><label for="cb-{{log0}}-{{day[0]}}" title="{{ day[0] }}"></label>
           {%- elsif meta[log0].type == 'number' -%}
             <input type="number" title="{{ day[0] }}" id="cb-{{log0}}-{{day[0]}}" value="{{day[1]}}" data-value="{{day[1]}}" disabled />
+          {%- else -%}
+            <input type="text" title="{{ day[0] }}" id="cb-{{log0}}-{{day[0]}}" value="{{day[1]}}" data-value="{{day[1]}}" disabled />
           {%- endif -%}
           {%- endfor -%}
             </div>
@@ -54,9 +56,14 @@ comments: false
     <script async type="text/javascript">
       let data = {
       {%- for log in logs -%}
+      {%- assign log0 = log[0] -%}
         '{{ log[0] }}': {
         {%- for day in log[1] -%}
+        {%- if meta[log0].type != 'string' -%}
           '{{ day[0] }}': {{ day[1] }},
+        {%- else -%}
+          '{{ day[0] }}': '{{ day[1] }}',
+        {%- endif -%}
         {%- endfor -%}
         },
       {%- endfor -%}
@@ -346,12 +353,21 @@ comments: false
 
         ;[].forEach.call(document.querySelectorAll('.data'), el => {
           if (!el.querySelector(`input[title="${ds}"]`)) {
-            missingEl = document.createElement('input')
+            let firstChild = el.firstChild
+            let missingEl = document.createElement('input')
             missingEl.setAttribute('type', el.getAttribute('data-type') === 'boolean' ? 'checkbox' : el.getAttribute('data-type'))
+            missingEl.setAttribute('id', `cb-${el.getAttribute('data-log')}-${ds}`)
             missingEl.setAttribute('title', ds)
             missingEl.indeterminate = true
             missingEl.addEventListener('change', checkcb(true))
-            el.insertBefore(missingEl, el.firstChild)
+            el.insertBefore(missingEl, firstChild)
+
+            if (el.getAttribute('data-type') === 'boolean') {
+              missingEl = document.createElement('label')
+              missingEl.setAttribute('for', `cb-${el.getAttribute('data-log')}-${ds}`)
+              missingEl.setAttribute('title', ds)
+              el.insertBefore(missingEl, firstChild)
+            }
           }
         })
 
@@ -367,16 +383,29 @@ comments: false
           next = new Date(next.slice(0, -4), parseInt(next.slice(-4, -2), 10) - 1, next.slice(-2))
 
           while (item - next !== 86400000) {
-            missing = new Date(item.valueOf() - 86400000)
+            let nextSibling = el.nextElementSibling
+            let missing = new Date(item.valueOf() - 86400000)
+            let ms = '' + missing.getUTCFullYear() + ('00' + (missing.getUTCMonth() + 1)).slice(-2) + ('00' + missing.getUTCDate()).slice(-2)
+
             missingEl = document.createElement('input')
-            missingEl.setAttribute('type', 'checkbox')
-            missingEl.setAttribute('title', '' + missing.getUTCFullYear() + ('00' + (missing.getUTCMonth() + 1)).slice(-2) + ('00' + missing.getUTCDate()).slice(-2))
+            missingEl.setAttribute('type', el.getAttribute('data-type') === 'boolean' ? 'checkbox' : el.getAttribute('data-type'))
+            missingEl.setAttribute('id', `cb-${el.parentNode.getAttribute('data-log')}-${ms}`)
+            missingEl.setAttribute('title', ms)
             missingEl.indeterminate = true
             missingEl.addEventListener('change', checkcb(true))
-            el.parentNode.insertBefore(missingEl, el.nextElementSibling)
+            el.parentNode.insertBefore(missingEl, nextSibling)
+
+            if (el.getAttribute('data-type') === 'boolean') {
+              missingEl = document.createElement('label')
+              missingEl.setAttribute('for', `cb-${el.parentNode.getAttribute('data-log')}-${ms}`)
+              missingEl.setAttribute('title', ds)
+              el.insertBefore(missingEl, nextSibling)
+            }
+
             item = missing
           }
         })
+
         ;[].forEach.call(document.querySelectorAll(`.data input[title="${ds}"]`), el => {
           el.removeAttribute('disabled')
           el.addEventListener('change', checkcb())

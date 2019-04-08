@@ -3,3 +3,6 @@
 
 'Water':
   type: number
+
+'Work':
+  type: string
