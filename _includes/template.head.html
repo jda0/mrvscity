@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ page.title }}</title>
+        
+    <link rel="stylesheet" href="/assets/main.css">
+
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png" type="image/png">
+    <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
+  </head>
+  <body>
+  {% if page.custom_header != true %}
+    <main>
+      <section class="mark">
+        <a href="/">{% include mark.svg %}</a>
+      </section>
+  {% endif %}
