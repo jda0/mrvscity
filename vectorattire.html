@@ -5,81 +5,64 @@ email: j.daly.2015@my.bristol.ac.uk
 comments: false
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ page.title }}</title>
-        
-    <link rel="stylesheet" href="/assets/main.css">
-  </head>
-  <body>
-    <main>
-      <section class="mark">
-        <a href="/">{% include mark.svg %}</a>
-      </section>
-
-      <section>
-        <article>
-          <h1 class="xpadb">{{ page.title }}</h1>
-          {%- unless page.nodate -%}<h3 class="fade">{{ page.date | date: "%A, %e %B %Y" }}</h3>{%- endunless -%}
-          
-          <!-- <div><div> -->
-        {% for attire in site.data.vectorattire.log %}
-          <!-- {% if attire.div %}
-          </div></div>
-          </div>
-          <div class="row">
-            <div class="col-2 shy">
-              <p>
-                {{ attire.div }} &mdash;
-              </p>
+{% include template.head.html %}
+<section>
+  <article>
+    <h1 class="xpadb">{{ page.title }}</h1>
+    {%- unless page.nodate -%}<h3 class="fade">{{ page.date | date: "%A, %e %B %Y" }}</h3>{%- endunless -%}
+    
+    <!-- <div><div> -->
+  {% for attire in site.data.vectorattire.log %}
+    <!-- {% if attire.div %}
+    </div></div>
+    </div>
+    <div class="row">
+      <div class="col-2 shy">
+        <p>
+          {{ attire.div }} &mdash;
+        </p>
+      </div>
+      <div class="col">
+        <div class="bumpy">
+        {% else %} -->
+          <div class="row card">
+            <div class="col-4" style="margin-top: -.5em;">
+            {% if attire.svg %}
+              {% include vectorattire/{{ attire.svg }}.svg %}</i>
+            {% else %}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+                <path xmlns="http://www.w3.org/2000/svg" d="M150,75a25,25,0,1,0-25-25A25,25,0,0,0,150,75Z" fill="#c49a6c"/>
+              {%- assign items = attire.items | reverse -%}
+              {% for item in items %}
+                {% for path in site.data.vectorattire.wardrobe[item].svg %}
+                {% if path.type %}
+                  <path d="{{ site.data.vectorattire.paths[path.type] }}" fill="{{ path.fill }}">
+                {% else %}
+                  <path d="{{ path.d }}" fill="{{ path.fill }}">
+                {% endif %}
+                    <title>{{ site.data.vectorattire.wardrobe[item].desc }}</title>
+                  </path>
+                {% endfor %}
+              {% endfor %}
+              </svg>
+            {% endif %}
             </div>
             <div class="col">
-              <div class="bumpy">
-              {% else %} -->
-                <div class="row card">
-                  <div class="col-4" style="margin-top: -.5em;">
-                  {% if attire.svg %}
-                    {% include vectorattire/{{ attire.svg }}.svg %}</i>
-                  {% else %}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
-                      <path xmlns="http://www.w3.org/2000/svg" d="M150,75a25,25,0,1,0-25-25A25,25,0,0,0,150,75Z" fill="#c49a6c"/>
-                    {%- assign items = attire.items | reverse -%}
-                    {% for item in items %}
-                      {% for path in site.data.vectorattire.wardrobe[item].svg %}
-                      {% if path.type %}
-                        <path d="{{ site.data.vectorattire.paths[path.type] }}" fill="{{ path.fill }}">
-                      {% else %}
-                        <path d="{{ path.d }}" fill="{{ path.fill }}">
-                      {% endif %}
-                          <title>{{ site.data.vectorattire.wardrobe[item].desc }}</title>
-                        </path>
-                      {% endfor %}
-                    {% endfor %}
-                    </svg>
-                  {% endif %}
-                  </div>
-                  <div class="col">
-                    <span class="big">
-                      {{ attire.date }}
-                    </span>
-                    <ul class="desc">
-                      {% for item in attire.items %}
-                      <li>{{ site.data.vectorattire.wardrobe[item].desc }}</li>
-                      {% endfor %}
-                    </ul>
-                  </div>
-                </div>
-              <!-- {% endif %} -->
-            {% endfor %}
-              <!-- </div>
+              <span class="big">
+                {{ attire.date }}
+              </span>
+              <ul class="desc">
+                {% for item in attire.items %}
+                <li>{{ site.data.vectorattire.wardrobe[item].desc }}</li>
+                {% endfor %}
+              </ul>
             </div>
-          </div> -->
-        </article>
-      </section>
-    </main>
-  </body>
-</html>
+          </div>
+        <!-- {% endif %} -->
+      {% endfor %}
+        <!-- </div>
+      </div>
+    </div> -->
+  </article>
+</section>
+{% include template.foot.html %}

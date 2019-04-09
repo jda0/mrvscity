@@ -1,6 +1,13 @@
 # - div: April
 
 log:
+  - date: 09 April 2019
+    items:
+      - asosknit
+      - threadless_black
+      - jeans_black
+      - iniki
+
   - date: 08 April 2019
     items:
       - asosjumper_pink
@@ -101,6 +108,11 @@ wardrobe:
     svg: 
       - type: tee
         fill: '#231f20'
+  threadless_black:
+    desc: THREADLESS Graphic T-shirt &mdash; Black
+    svg: 
+      - type: tee
+        fill: '#231f20'
   csstee_mint:
     desc: CSS BRISTOL Event T-shirt &mdash; Mint Green
     svg: 
@@ -127,6 +139,11 @@ wardrobe:
     svg:
       - type: jumper
         fill: '#fcf'
+  asosknit:
+    desc: ASOS COLLUSION Fisherman Rib Jumper &mdash; Black
+    svg:
+      - type: jumper
+        fill: '#231f20'
   hippocampus:
     desc: HIPPO CAMPUS Bambi Tour Sweatshirt
     svg:

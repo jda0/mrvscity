@@ -2,26 +2,17 @@
 title: mrvs
 author: James Daly
 email: j.daly.2015@my.bristol.ac.uk
+custom_header: true
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>{{ page.title }}</title>
-  
-  <link rel="stylesheet" href="/assets/main.css">
-</head>
-<body>
+{% include template.head.html %}
   <header>
     <section class="mark">
       {% include mark.svg %}
     </section>
     <section>
       <p class="bold">
-        I am a student, outreach ambassador and developer.<br>
+        I am a s    tudent, outreach ambassador and developer.<br>
         I <strong>design</strong> and <strong>implement</strong> well-considered and maintainable experiences.<br>
         I believe in <strong>consistency</strong>, <strong>accessibility</strong> and <strong>utility</strong>.<br>
         I know that <strong>tomorrow</strong> is as <strong>important as today</strong>.<br>
@@ -131,8 +122,5 @@ email: j.daly.2015@my.bristol.ac.uk
         </div>
       </div>
     </section>
-  </main>
-
-  <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
-</body>
-</html>
+    <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
+{% include template.foot.html %}
