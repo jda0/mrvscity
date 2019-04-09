@@ -44,6 +44,19 @@
   svg: md-accessibility
   lastcommit: 4/19
 
+- title: Tools
+  links:
+  - url: //nat20.glitch.me
+    title: Dice
+  - url: //pomo.glitch.me
+    title: Pomodoro
+  desc: Personal, minimal web tools (digital dice and a pomodoro timer), with configuration options settable through the URI hash; to share dice with someone, click 'Live', share the URI then click 'Live' on the their device
+  langs:
+  - js
+  - node
+  - web
+  lastcommit: 1/19
+
 - title: Vectorattire
   links:
   - url: /vectorattire
