@@ -144,6 +144,7 @@
     type: organization
     title: Yu-Scan Labs
     url: gl!yuscan
+  private: true
   lastcommit: 9/18
 
 # - title: Donsol
