@@ -1,0 +1,116 @@
+---
+title: Pomo
+author: James Daly
+email: j.daly.2015@my.bristol.ac.uk
+comments: false
+custom_meta: true
+---
+{% include template.head.html %}
+    <style type="text/css">
+      @font-face {
+        font-family: 'Battalion';
+        src: url('https://cdn.glitch.com/633d2658-63f3-4068-a64a-2d98e2b0d2ea%2FBattalionMono-Regular.woff2?1534707884915') format('woff2'),
+            url('https://cdn.glitch.com/633d2658-63f3-4068-a64a-2d98e2b0d2ea%2FBattalionMono-Regular.woff?1534707885123')  format('woff');
+        font-display: fallback;
+      }
+
+      body {
+        font: 1em/0 'Battalion', monospace;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+      }
+
+      html, body, svg, text {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      text {
+        font-size: 25vw;
+        font-weight: normal;
+        
+        text-anchor: middle;
+        alignment-baseline: middle;
+        dominant-baseline: middle;
+        
+        margin: 0;
+        padding: 0;
+      }
+
+      @media screen and (max-height: 31.25vw) {
+        h1 {
+          font-size: 80vh;
+        }
+      }
+    </style>
+  </head>  
+  <body>
+    <svg>
+      <text id="time" x="50%" y="50%"></text>
+    </svg>
+
+    <script type="text/javascript">
+      const parentEl = document.body
+        const timeEl = document.getElementById('time')
+        let opts = Object.assign(
+          { t: 25, 
+            r: 5, 
+            o: Date.now() 
+          },
+          window.location.hash.slice(1).split('&').reduce((a, x) => {
+            if (x !== '') {
+              const t = x.split('=')
+              const v = t.length > 2 ? t.slice(1) : t.length === 2 ? t[1] : true
+              a[t[0]] = ['t', 'r', 'o'].includes(t[0]) ? parseInt(v) : v
+            }
+            return a
+          }, {})
+        )
+
+        window.location.hash = '#' + Object.keys(opts).map(k => opts[k] === true ? k : `${k}=${opts[k]}`).join('&')
+
+        const enforce = (opt, fallback) => { if (!opts[opt] || !/^([0-9a-f]{3}){1,2}$/i.test(opts[opt])) opts[opt] = fallback }
+        [ ['tbg', '000'], 
+          ['tfg', 'fff'   ], 
+          ['rbg', '000'], 
+          ['rfg', '777'   ] ].forEach(x => enforce(...x))
+
+        let mode = null
+        let media = {
+          r: new Audio('https://cdn.glitch.com/633d2658-63f3-4068-a64a-2d98e2b0d2ea%2Fb2.mp3?1533518117229'),
+          t: new Audio('https://cdn.glitch.com/633d2658-63f3-4068-a64a-2d98e2b0d2ea%2Fb2.mp3?1533518117229')
+        }
+
+        function tick () {
+          const pad = s => `00${s}`.slice(-2)
+          
+          let t = Math.floor((Date.now() - opts.o) / 1000) % ((opts.t + opts.r) * 60)
+          
+          if (t > opts.t * 60) {
+            t = (opts.t + opts.r) * 60 - t
+            console.log(t)
+            if (mode !== 'r') {
+              mode = 'r'
+              parentEl.style.backgroundColor = '#' + opts.rbg
+              timeEl.style.fill = '#' + opts.rfg
+              media.r.play()
+            }
+          } else if (mode !== 't') {
+            mode = 't'
+            parentEl.style.backgroundColor = '#' + opts.tbg
+            timeEl.style.fill = '#' + opts.tfg
+            media.t.play()
+          }
+          
+          timeEl.innerHTML = `${Math.floor(t / 60)}:${pad(t % 60)}`
+          
+          window.requestAnimationFrame(tick)
+        }
+
+        tick()
+    </script>
+  </body>
+</html>

@@ -2,7 +2,23 @@
 ---
 
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css");
-@import url('https://indestructibletype.com/fonts/Jost.css');
+// @import url('https://indestructibletype.com/fonts/Jost.css');
+
+@font-face {
+  font-family: "Jost";
+  src: url("fonts/Jost-300.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "Jost";
+  src: url("fonts/Jost-600.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: fallback;
+}
 
 * {
   box-sizing: border-box;
