@@ -1,6 +1,13 @@
 # - div: April
 
 log:
+  - date: 10 April 2019
+    items:
+      - asosknit
+      - bloomberg
+      - jeans_black
+      - slipons_black
+  
   - date: 09 April 2019
     items:
       - asosknit
@@ -105,6 +112,11 @@ wardrobe:
         fill: '#231f20'
   uniqlout_black:
     desc: UNIQLO UT T-shirt &mdash; Black
+    svg: 
+      - type: tee
+        fill: '#231f20'
+  bloomberg:
+    desc: BLOOMBERG Promotional Graphic T-shirt &mdash; Black
     svg: 
       - type: tee
         fill: '#231f20'

@@ -48,14 +48,14 @@
   links:
   - url: //nat20.glitch.me
     title: Dice
-  - url: //pomo.glitch.me
+  - url: /pomo
     title: Pomodoro
-  desc: Personal, minimal web tools (digital dice and a pomodoro timer), with configuration options settable through the URI hash; to share dice with someone, click 'Live', share the URI then click 'Live' on the their device
+  desc: Personal, minimal web tools (digital dice and a pomodoro timer), with configuration options settable through the URI hash; to share dice with someone, click 'Live', share the URI with them then click 'Live' on the their device
   langs:
   - js
   - node
   - web
-  lastcommit: 1/19
+  lastcommit: 4/19
 
 - title: Vectorattire
   links:
@@ -84,7 +84,6 @@
   - web
   desc: An online continuous double auction for event tickets
   svg: takon-mark
-  private: true
   lastcommit: 1/19
 
 - title: Proc
