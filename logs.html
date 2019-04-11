@@ -359,38 +359,40 @@ comments: false
       }
     })
 
-    ;[].forEach.call(document.querySelectorAll('.data input'), el => {          
-      let item = el.getAttribute('title')
-
+    ;[].forEach.call(document.querySelectorAll('.data input'), el => {
       let nextEl = el.nextElementSibling
       if (!nextEl) return
       if (nextEl.tagName !== 'INPUT') nextEl = nextEl.nextElementSibling
       if (!nextEl) return
+
+      let item = el.getAttribute('title')
       let next = nextEl.getAttribute('title')
       item = new Date(item.slice(0, -4), parseInt(item.slice(-4, -2), 10) - 1, item.slice(-2))
       next = new Date(next.slice(0, -4), parseInt(next.slice(-4, -2), 10) - 1, next.slice(-2))
 
       while (item - next !== 86400000) {
-        let nextSibling = el.nextElementSibling
+        console.log('id', el.id)        
+        console.log('start', item, next)
         let missing = new Date(item.valueOf() - 86400000)
         let ms = '' + missing.getUTCFullYear() + ('00' + (missing.getUTCMonth() + 1)).slice(-2) + ('00' + missing.getUTCDate()).slice(-2)
 
         missingEl = document.createElement('input')
-        missingEl.setAttribute('type', el.getAttribute('data-type') === 'boolean' ? 'checkbox' : el.getAttribute('data-type'))
+        missingEl.setAttribute('type', el.parentNode.getAttribute('data-type') === 'boolean' ? 'checkbox' : el.parentNode.getAttribute('data-type'))
         missingEl.setAttribute('id', `cb-${el.parentNode.getAttribute('data-log')}-${ms}`)
         missingEl.setAttribute('title', ms)
         missingEl.indeterminate = true
         missingEl.addEventListener('change', checkcb(true))
-        el.parentNode.insertBefore(missingEl, nextSibling)
+        el.parentNode.insertBefore(missingEl, nextEl)
 
-        if (el.getAttribute('data-type') === 'boolean') {
+        if (el.parentNode.getAttribute('data-type') === 'boolean') {
           missingEl = document.createElement('label')
           missingEl.setAttribute('for', `cb-${el.parentNode.getAttribute('data-log')}-${ms}`)
           missingEl.setAttribute('title', ds)
-          el.insertBefore(missingEl, nextSibling)
+          el.parentNode.insertBefore(missingEl, nextEl)
         }
 
         item = missing
+        console.log('=', item, missing)
       }
     })
 
