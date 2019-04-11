@@ -149,19 +149,19 @@ comments: false
     }
 
 
-    status('Getting master...', false, 'save :: getting ref master...')
+    status('Getting master (1/8)...', false, 'save :: getting ref master...')
     let res = await fetch('https://mrvs.city/.netlify/git/github/git/refs/heads/master', { headers })
     const ref = await res.json()
 
     if (!ref.object || ref.object.type !== 'commit' || !ref.object.sha) throw `bad ref heads/master`
 
-    status('Getting HEAD...', false, `save :: getting commit ${ref.object.sha}...`)
+    status('Getting HEAD (2/8)...', false, `save :: getting commit ${ref.object.sha}...`)
     res = await fetch(`https://mrvs.city/.netlify/git/github/git/commits/${ref.object.sha}`, { headers })
     const commit = await res.json()
 
     if (!commit.tree || !commit.tree.sha) throw `bad commit ${ref.object.sha}`
 
-    status('Getting tree...', false, `save :: getting tree ${commit.tree.sha} for commit...`)
+    status('Getting tree (3/8)...', false, `save :: getting tree ${commit.tree.sha} for commit...`)
     res = await fetch(`https://mrvs.city/.netlify/git/github/git/trees/${commit.tree.sha}`, { headers })
     const tree = await res.json()
 
@@ -169,7 +169,7 @@ comments: false
     const dir = tree.tree.find(e => e.path === '_data' && e.type === 'tree')
     if (!dir) throw `_data not found ${tree.sha}`
 
-    status('Getting subtree...', false, `save :: getting subtree ${dir.sha} for _data/...`)
+    status('Getting subtree (4/8)...', false, `save :: getting subtree ${dir.sha} for _data/...`)
     res = await fetch(`https://mrvs.city/.netlify/git/github/git/trees/${dir.sha}`, { headers })
     const subtree = await res.json()
 
@@ -178,7 +178,7 @@ comments: false
     if (!file) throw `logs.yaml not found ${subtree.sha}`
 
     
-    status('Creating blob...', false, `save :: creating new blob for logs...`)
+    status('Creating blob (5/8)...', false, `save :: creating new blob for logs...`)
     res = await fetch(`https://mrvs.city/.netlify/git/github/git/blobs`, {
       method: 'POST',
       headers,
@@ -200,7 +200,7 @@ comments: false
       ]
     }
 
-    status('Creating subtree...', false, `save :: creating new subtree for _data/ with blob ${new_blob.sha}...`)
+    status('Creating subtree (6/8)...', false, `save :: creating new subtree for _data/ with blob ${new_blob.sha}...`)
     res = await fetch(`https://mrvs.city/.netlify/git/github/git/trees`, {
       method: 'POST',
       headers,
@@ -222,7 +222,7 @@ comments: false
       ]
     }
 
-    status('Creating tree...', false, `save :: creating new tree for commit with blob ${new_blob.sha}...`)
+    status('Creating tree (7/8)...', false, `save :: creating new tree for commit with blob ${new_blob.sha}...`)
     res = await fetch(`https://mrvs.city/.netlify/git/github/git/trees`, {
       method: 'POST',
       headers,
@@ -242,7 +242,7 @@ comments: false
       }
     }
 
-    status('Creating commit...', false, `save :: creating new commit for tree ${new_tree.sha}...`)
+    status('Creating commit (8/8)...', false, `save :: creating new commit for tree ${new_tree.sha}...`)
     res = await fetch(`https://mrvs.city/.netlify/git/github/git/commits`, {
       method: 'POST',
       headers,
@@ -371,10 +371,10 @@ comments: false
       next = new Date(next.slice(0, -4), parseInt(next.slice(-4, -2), 10) - 1, next.slice(-2))
 
       while (item - next !== 86400000) {
-        console.log('id', el.id)        
-        console.log('start', item, next)
+        console.log('id', el.id)
         let missing = new Date(item.valueOf() - 86400000)
-        let ms = '' + missing.getUTCFullYear() + ('00' + (missing.getUTCMonth() + 1)).slice(-2) + ('00' + missing.getUTCDate()).slice(-2)
+        let ms = '' + missing.getUTCFullYear() + ('00' + (missing.getUTCMonth() + 1)).slice(-2) + ('00' + (missing.getUTCDate() + 1)).slice(-2)
+        console.log('start', item, next, ms)
 
         missingEl = document.createElement('input')
         missingEl.setAttribute('type', el.parentNode.getAttribute('data-type') === 'boolean' ? 'checkbox' : el.parentNode.getAttribute('data-type'))
@@ -387,7 +387,7 @@ comments: false
         if (el.parentNode.getAttribute('data-type') === 'boolean') {
           missingEl = document.createElement('label')
           missingEl.setAttribute('for', `cb-${el.parentNode.getAttribute('data-log')}-${ms}`)
-          missingEl.setAttribute('title', ds)
+          missingEl.setAttribute('title', ms)
           el.parentNode.insertBefore(missingEl, nextEl)
         }
 
