@@ -1,6 +1,27 @@
 # - div: April
 
 log:
+  - date: 17 April 2019
+    items:
+      - nextchen
+      - threadless_white
+      - ezyjeans_red
+      - pureboost
+
+  - date: 16 April 2019
+    items:
+      - hippocampus
+      - uniqlotee_white
+      - ezyjeans_red
+      - pureboost
+
+  - date: 15 April 2019
+    items:
+      - hollister
+      - uniqlotee_white
+      - jeans_blue
+      - pureboost
+
   - date: 14 April 2019
     items:
       - bloomberg_uc
@@ -144,6 +165,11 @@ wardrobe:
       - type: shirt
         fill: '#069'
 
+  uniqlotee_white:
+    desc: UNIQLO Soft Touch Crew Neck Long-sleeve T-shirt &mdash; White
+    svg: 
+      - type: tee
+        fill: '#fff'
   uniqlotee_black:
     desc: UNIQLO Soft Touch Crew Neck Long-sleeve T-shirt &mdash; Black
     svg: 
@@ -180,6 +206,11 @@ wardrobe:
           h: 8.75
           r: 1.25
         fill: '#fff'
+  threadless_white:
+    desc: THREADLESS Graphic T-shirt &mdash; White
+    svg: 
+      - type: tee
+        fill: '#fff'
   threadless_black:
     desc: THREADLESS Graphic T-shirt &mdash; Black
     svg: 
@@ -211,6 +242,18 @@ wardrobe:
     svg:
       - type: jumper
         fill: '#fcf'
+  nextchen:
+    desc: NEXT Chenille Jumper &mdash; Black
+    svg:
+      - type: jumper
+        fill: '#231f20'
+  hollister:
+    desc: HOLLISTER Striped Crew Sweatshirt
+    defs:
+      - stripe
+    svg:
+      - type: jumper
+        fill: 'url(#stripe)'
   asosknit:
     desc: ASOS COLLUSION Fisherman Rib Jumper &mdash; Black
     svg:
@@ -232,3 +275,9 @@ paths:
   jumper: M256.25,75c-28.82,7.73-62,11.55-93.76,12.34v.16a12.5,12.5,0,0,1-25,0v-.16C105.77,86.55,72.57,82.73,43.75,75L37.5,100c23.25,6.25,50,10.38,75,12.5V185h75V112.5c25-2.12,51.75-6.25,75-12.5Z
   cardigan: M131.48,84.65C99.33,83.41,69.22,79.24,44.4,72.59l-2.46-.66-7.46,29.85,2.37.63C63.52,109.58,91,113.09,110,114.79V212.5h30L133.77,84.74ZM258.06,71.93l-2.46.65c-24.86,6.66-55,10.84-87.06,12.07l-2.29.09L160,212.5h30V114.79c19.05-1.7,46.48-5.21,73.15-12.38l2.37-.63Z
   shirt: M256.3,75c-26.2,7-56,10.8-85.1,12c1.8,3.2,3.1,9.2,3.5,11.2l0.9,4.3L162.6,98l-1.3-5.2c-2,4.2-6.3,7.2-11.3,7.2c-5,0-9.3-2.9-11.3-7.1l-1.3,5.1l-12.9,4.6l0.9-4.3c0.4-2,1.7-8,3.5-11.2C99.8,85.8,70,82,43.8,75l-6.3,25c23.3,6.3,50,10.4,75,12.5V185h75v-72.5c25-2.1,51.8-6.3,75-12.5L256.3,75zM138.4,83.8l-3.1,12.3l-7.5,2.7c0,0,1.8-9,3.8-11.3C132.8,86,138.4,83.8,138.4,83.8zM161.6,83.8l3.1,12.3l7.5,2.7c0,0-1.8-9-3.8-11.3C167.2,86,161.6,83.8,161.6,83.8z
+
+defs:
+  stripe: '<pattern id="stripe" patternUnits="userSpaceOnUse" width="30" height="30">
+            <rect x="0" y="0" width="30" height="30" style="fill:white; stroke: none" />
+            <line x1="0" y1="20" x2="30" y2="20" style="stroke:#262262; stroke-width:10" />
+          </pattern>'

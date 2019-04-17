@@ -31,8 +31,16 @@ comments: false
               {% include vectorattire/{{ attire.svg }}.svg %}</i>
             {% else %}
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
-                <path d="M150,75a25,25,0,1,0-25-25A25,25,0,0,0,150,75Z" fill="#c49a6c"/>
               {%- assign items = attire.items | reverse -%}
+                <defs>
+              {% for item in items %}
+                {% for def in site.data.vectorattire.wardrobe[item].defs %}
+                  {{ site.data.vectorattire.defs[def] }}
+                {% endfor %}
+              {% endfor %}
+                </defs>
+
+                <path d="M150,75a25,25,0,1,0-25-25A25,25,0,0,0,150,75Z" fill="#c49a6c"/>
               {% for item in items %}
                 {% for path in site.data.vectorattire.wardrobe[item].svg %}
                 {% if path.type %}

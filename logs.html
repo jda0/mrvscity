@@ -130,11 +130,11 @@ comments: false
     }
 
     status('Saving', false, 'save', data2)
-
+    
     let yaml = Object.keys(data2)
       .reduce((a, k) => `${a}\n'${k}':\n${
         Object.keys(data2[k])
-          .reduce((a, k2) => `  ${k2}: ${data2[k][k2]}\n${a}`, '')
+          .reduce((a, k2) => `  ${k2}: ${typeof data2[k][k2] === 'string' ? `'${data2[k][k2]}'` : data2[k][k2]}\n${a}`, '')
       }`, '')
 
     status('Built YAML', false, `save :: rebuilt _data/logs.yaml: %c${yaml}`, 'color: #777')
