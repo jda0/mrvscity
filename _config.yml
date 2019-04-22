@@ -7,18 +7,32 @@ defaults:
       layout: "default"
       author: "James Daly"
 
-title: James in Space
+title: mrvs
 author: James Daly
-email: hello@jamesin.space
+email: hello@mrvs.city
 description: >
-  James Daly's Mission Control
+  Student, outreach ambassador and developer. Consistency, accessibility and utility.
 
 twitter_username: jda0_
 github_username: jda0
 facebook_username: 0jda0
 instagram_username: jda0
-linkedin_username: james-d-65b0a087
+linkedin_username: 0jda0
 disqus:
   shortname: jda0
 
 permalink: :categories/:short_year:month/:title
+
+plugins:
+  - jekyll-pwa-plugin
+
+pwa:
+  dest_js_directory: assets/js
+  cache_name: pwa-cache
+  precache_glob_directory: /
+  precache_glob_patterns:
+    - "assets/**/*.{js,css,svg,ttf,woff,woff2}"
+    - "apps/*.html"
+    - "/*.html"
+  precache_glob_ignores:
+    - sw-register.js

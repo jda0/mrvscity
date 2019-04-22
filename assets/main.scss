@@ -30,7 +30,7 @@
   --base02: #1d414d;
   --base03: #333;
   --base04: #444;
-  --base05: #666;
+  --base05: #777;
   --base06: #aaa;
   --base07: #eee;
   --base08: #d88568;
@@ -45,6 +45,7 @@
 
 html {
   background-color: var(--base01);
+  overflow-x: hidden;
 }
 
 html,
@@ -60,11 +61,10 @@ select {
 
 *::selection {
   color: var(--base07);
-  background-color: var(--base02);
+  background-color: var(--base0E);
 }
 
 body {
-  overflow-x: hidden;
   padding-bottom: 1.4em;
 }
 
@@ -181,6 +181,11 @@ ul.inline li {
   white-space: nowrap;
 }
 
+ul.inline li.break-after:after {
+  content: "\a";
+  white-space: pre;
+}
+
 ul.inline li i svg {
   color: var(--base02);
   fill: var(--base02);
@@ -196,7 +201,7 @@ ul.inline li a {
 }
 
 .tags {
-  color: var(--base04);
+  color: var(--base05);
 }
 
 .big {
@@ -212,7 +217,7 @@ ul.inline li a {
 }
 
 .shy {
-  color: var(--base03);
+  color: var(--base05);
 }
 
 .b {

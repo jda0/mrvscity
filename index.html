@@ -26,16 +26,15 @@ custom_header: true
             <i aria-hidden="true">{% include md-person.svg %}</i>
             {{ page.author }}
         </li>
-        <li>
+        <li class="break-after">
           <a href="mailto:{{ page.email }}">
             <i aria-label="email" role="presentation">{% include md-mail.svg %}</i>
             {{ page.email }}
           </a>
         </li>
-        <br>
         {%- for network in site.data.networks -%}
         <li>
-          <a href="{{ network.url }}">
+          <a href="{{ network.url }}" target="_blank" rel="noopener">
             <i aria-label="{{ network.name }}" role="presentation">{%- include {{ network.svg }}.svg -%}</i>
             {{ network.username }}
           </a>
@@ -87,7 +86,7 @@ custom_header: true
                 {%- elsif link.url contains 'gl!' -%}Repo
                 {%- else -%}Link{%- endif -%}
                 {%- endcapture -%}
-                , <a href="{% if link.url contains '//' %}{{ link.url }}{% elsif link.url contains 'gl!' %}https://gitlab.com/{{ link.url | remove_first: 'gl!' }}{% elsif link.url contains 'gh!' %}https://github.com/{{ link.url | remove_first: 'gh!' }}{% else %}{{ link.url }}{% endif %}" title="{{ link_title }}: {{ link.url | remove_first: '//' }}">{{ link_title }}</a>
+                , <a href="{% if link.url contains '//' %}{{ link.url }}" target="_blank" rel="noopener{% elsif link.url contains 'gl!' %}https://gitlab.com/{{ link.url | remove_first: 'gl!' }}" target="_blank" rel="noopener{% elsif link.url contains 'gh!' %}https://github.com/{{ link.url | remove_first: 'gh!' }}" target="_blank" rel="noopener{% elsif link.url contains '.pdf' %}{{ link.url }} target="_blank{% else %}{{ link.url }}{% endif %}" title="{{ link_title }}: {{ link.url | remove_first: '//' }}">{{ link_title }}</a>
               {%- endfor -%}
               {%- endcapture -%}
 
@@ -106,7 +105,7 @@ custom_header: true
                     {% when 'git-merge' %}
                       <path fill-rule="evenodd" d="M10 7.01c-.73 0-1.38.41-1.73 1.02v-.02C7.22 7.99 6 7.65 5.14 6.99c-.75-.58-1.5-1.61-1.89-2.44A1.993 1.993 0 0 0 2 1C.89 1 0 1.9 0 3.01a2 2 0 0 0 1 1.72v6.56c-.59.35-1 .99-1 1.72 0 1.11.89 2 2 2a1.993 1.993 0 0 0 1-3.72V7.68c.67.7 1.44 1.27 2.3 1.69.86.42 2.03.63 2.97.64v-.02c.36.61 1 1.02 1.73 1.02 1.11 0 2-.89 2-2 0-1.11-.89-2-2-2zm-6.8 6c0 .66-.55 1.2-1.2 1.2-.65 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2zM2 4.21c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm8 6c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path>
                   {% endcase %}
-                  </svg></i>&nbsp;<a href="{% if repo.tag.url contains 'gl!' %}https://gitlab.com/{{ repo.tag.url | remove_first: 'gl!' }}{% else %}https://github.com/{{repo.tag.url}}{% endif %}" title="{{site.data.maps.tags[repo.tag.type]}} {{repo.tag.title}}">{{repo.tag.title}}</a></span></a>&emsp;
+                  </svg></i>&nbsp;<a href="{% if repo.tag.url contains 'gl!' %}https://gitlab.com/{{ repo.tag.url | remove_first: 'gl!' }}{% else %}https://github.com/{{repo.tag.url}}{% endif %}" title="{{site.data.maps.tags[repo.tag.type]}} {{repo.tag.title}}" target="_blank" rel="noopener">{{repo.tag.title}}</a></span></a>&emsp;
               {%- endif -%}
 
               {%- if repo.langs -%}

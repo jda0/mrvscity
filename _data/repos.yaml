@@ -13,7 +13,7 @@
   links:
   - url: //cssbristol.co.uk
   - url: /css
-    title: More
+    title: About
   desc: 
     Coordinating with University of Bristol and external organisations to increase STEM engagement, I also held the position of Acting Press Officer from September to December 2018, managing branding, publicity and social media presence for the 2.1k+ member society
   lastcommit: 8/19
@@ -34,7 +34,7 @@
 
 - title: Logs
   links:
-  - url: /logs
+  - url: /apps/logs
   desc: Trackers for various things like activity and hydration, with a static client-side CMS that updates the site through Netlify Git Gateway 
   langs:
   - git
@@ -48,7 +48,7 @@
   links:
   - url: //nat20.glitch.me
     title: Dice
-  - url: /pomo
+  - url: /apps/pomo
     title: Pomodoro
   desc: Personal, minimal web tools (digital dice and a pomodoro timer), with configuration options settable through the URI hash; to share dice with someone, click 'Live', share the URI with them then click 'Live' on the their device
   langs:
@@ -97,7 +97,7 @@
 
 - title: Hedgehog Bot
   links:
-  - url: //hedgehogbot.digimakers.org.uk
+  - url: //hedgehogbot.digimakers.co.uk
   langs: 
   - arduino
   - cpp
