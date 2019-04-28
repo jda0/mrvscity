@@ -16,6 +16,8 @@ custom_manifest: logs.manifest.json
 
   {%- for log in logs -%}
   {%- assign log0 = log[0] -%}
+  {%- if log0 contains '_' -%}
+  {%- else -%}
     <div class="card">
       <h3>{{ log0 }}</h3>
       <div class="data" data-log="{{ log0 }}" data-type="{{ meta[log0].type }}">
@@ -31,6 +33,7 @@ custom_manifest: logs.manifest.json
     {%- endfor -%}
       </div>
     </div>
+  {%- endif -%}
   {%- endfor -%}
   </article>
 </section>
@@ -43,6 +46,8 @@ custom_manifest: logs.manifest.json
   let data = {
   {%- for log in logs -%}
   {%- assign log0 = log[0] -%}
+  {%- if log0 contains '_' -%}
+  {%- else -%}
     '{{ log[0] }}': {
     {%- for day in log[1] -%}
     {%- if meta[log0].type != 'string' -%}
@@ -52,6 +57,7 @@ custom_manifest: logs.manifest.json
     {%- endif -%}
     {%- endfor -%}
     },
+  {%- endif -%}
   {%- endfor -%}
   }
 
@@ -105,22 +111,43 @@ custom_manifest: logs.manifest.json
   }
 
   let statusReset
-  const status = (message = netlifyIdentity.currentUser().email, reset = true, ...extendedMessage) => {
+  const status = (message = netlifyIdentity.currentUser().email, opts = {}, ...extendedMessage) => {
     clearTimeout(statusReset)
+
+    if (!opts) opts = {}
+    let bc = opts.error ? '#c0392b': '#666'
+    let c
+    if (opts.group && opts.collapsed) c = 'groupCollapsed'
+    else if (opts.group) c = 'group'
+    else if (opts.error) c = 'error'
+    else c = 'info'
     
     if (message) document.getElementById('status').innerHTML = message
-    if (extendedMessage) console.log(...extendedMessage)
+    if (extendedMessage && opts.label) console[c]('%c' + opts.label, `background: ${bc}; color: #fff; font-weight: bolder; padding: 2px 0.5em; border-radius: 0.5em`, ...extendedMessage)
+    else if (extendedMessage) console[c](...extendedMessage)
 
-    if (reset) statusReset = setTimeout(status, 500)
+    if (opts.reset !== false && message) statusReset = setTimeout(status, 1500)
   }
+  const groupEnd = console.groupEnd
 
-  const errorStatus = (message, reset = true, ...extendedMessage) => {
-    clearTimeout(statusReset)
-    
-    if (message) document.getElementById('status').innerHTML = message
-    if (extendedMessage) console.error(...extendedMessage)
+  const checkStale = async () => {
+    const lastDefined = '{{ logs._commit }}'
 
-    if (reset) statusReset = setTimeout(status, 1500)
+    status('Authorising... (1/2)', { reset: false, label: 'checkStale' }, 'Building authorisation headers...')
+    const jwt = await netlifyIdentity.currentUser().jwt()
+    const headers = {
+      Authorization: `Bearer ${jwt}`,
+      'Content-Type': 'application/json',
+    }
+
+    status('Checking freshness... (2/2)', { reset: false, label: 'checkStale' }, 'Getting ref logs...')
+    let res = await fetch('https://mrvs.city/.netlify/git/github/git/refs/heads/logs', { headers })
+    const ref = await res.json()
+
+    if (!ref.object || ref.object.type !== 'commit' || !ref.object.sha) throw status('Failed.', { error: true, label: 'checkStale' }, 'Bad ref heads/logs.')
+
+    if (ref.object.sha.slice(0, 7) !== lastDefined) status('Stale! Logs may be inaccurate.', { reset: false, label: 'checkStale' }, `Stale (${ref.object.sha.slice(0, 7)} ≠ ${lastDefined}).`)
+    else status('Certified fresh.', { label: 'checkStale' }, 'Up to date.')
   }
 
   const save = async (data, updates) => {
@@ -130,53 +157,59 @@ custom_manifest: logs.manifest.json
       ...updates[key]
     }
 
-    status('Saving', false, 'save', data2)
-    
-    let yaml = Object.keys(data2)
-      .reduce((a, k) => `${a}\n'${k}':\n${
-        Object.keys(data2[k])
-          .reduce((a, k2) => `  ${k2}: ${typeof data2[k][k2] === 'string' ? `'${data2[k][k2]}'` : data2[k][k2]}\n${a}`, '')
-      }`, '')
+    status('Saving', { group: true, reset: false, label: 'save' }, 'Saving... ', data2)
 
-    status('Built YAML', false, `save :: rebuilt _data/logs.yaml: %c${yaml}`, 'color: #777')
-
+    status('Authorising... (1/11)', { reset: false, label: 'save' }, 'Building authorisation headers...')
     const jwt = await netlifyIdentity.currentUser().jwt()
     const headers = {
       Authorization: `Bearer ${jwt}`,
       'Content-Type': 'application/json',
     }
 
-
-    status('Getting master... (1/8)', false, 'save :: getting ref master...')
+    status('Getting master... (2/11)', { reset: false, label: 'save' }, 'Getting ref master...')
     let res = await fetch('https://mrvs.city/.netlify/git/github/git/refs/heads/master', { headers })
     const ref = await res.json()
 
-    if (!ref.object || ref.object.type !== 'commit' || !ref.object.sha) throw `bad ref heads/master`
+    if (!ref.object || ref.object.type !== 'commit' || !ref.object.sha) throw errorStatus('Bad master.', false, 'save', 'Bad ref heads/master.')
 
-    status('Getting HEAD... (2/8)', false, `save :: getting commit ${ref.object.sha}...`)
+    const logs_ref = ref.object.sha
+    data2._commit = logs_ref.slice(0, 7)
+    
+    status('Building YAML... (3/11)', { group: true, collapsed: true, reset: false, label: 'save' }, 'Building YAML...')
+    let yaml = Object.keys(data2)
+      .reduce((a, k) => `${a}\n'${k}': ${
+        (typeof data2[k] === 'object')
+          ? '\n' +
+            Object.keys(data2[k])
+              .reduce((a, k2) => `  ${k2}: ${typeof data2[k][k2] === 'string' ? `'${data2[k][k2]}'` : data2[k][k2]}\n${a}`, '')
+          : `'${data2[k].toString()}'`
+      }`, '')
+    status(null, {}, `%c${yaml}`, 'color: #777')
+    groupEnd()
+
+    status('Getting HEAD... (4/11)', { reset: false, label: 'save' }, `Getting commit ${ref.object.sha}...`)
     res = await fetch(`https://mrvs.city/.netlify/git/github/git/commits/${ref.object.sha}`, { headers })
     const commit = await res.json()
 
-    if (!commit.tree || !commit.tree.sha) throw `bad commit ${ref.object.sha}`
+    if (!commit.tree || !commit.tree.sha) throw errorStatus('Bad commit.', false, 'save', `Bad commit ${ref.object.sha}.`)
 
-    status('Getting tree... (3/8)', false, `save :: getting tree ${commit.tree.sha} for commit...`)
+    status('Getting tree... (5/11)', { reset: false, label: 'save' }, `Getting tree ${commit.tree.sha} for commit...`)
     res = await fetch(`https://mrvs.city/.netlify/git/github/git/trees/${commit.tree.sha}`, { headers })
     const tree = await res.json()
 
-    if (!tree.tree) throw `bad tree ${commit.tree.sha}`
+    if (!tree.tree) throw status('Bad tree.', { error: true, reset: false, label: 'save' }, `Bad tree ${commit.tree.sha}.`)
     const dir = tree.tree.find(e => e.path === '_data' && e.type === 'tree')
-    if (!dir) throw `_data not found ${tree.sha}`
+    if (!dir) throw status('Bad tree.', { error: true, reset: false, label: 'save' }, `_data/ not found in ${tree.sha}.`)
 
-    status('Getting subtree... (4/8)', false, `save :: getting subtree ${dir.sha} for _data/...`)
+    status('Getting subtree... (6/11)', { reset: false, label: 'save' }, `Getting subtree ${dir.sha} for _data/...`)
     res = await fetch(`https://mrvs.city/.netlify/git/github/git/trees/${dir.sha}`, { headers })
     const subtree = await res.json()
 
-    if (!subtree.tree) throw `bad tree ${tree.sha}`
+    if (!subtree.tree) throw status('Bad subtree.', { error: true, reset: false, label: 'save' }, `Bad subtree ${tree.sha}.`)
     const file = subtree.tree.find(e => e.path === 'logs.yaml' && e.type === 'blob')
-    if (!file) throw `logs.yaml not found ${subtree.sha}`
+    if (!file) throw status('Bad subtree.', { error: true, reset: false, label: 'save' }, `logs.yaml not found in ${tree.sha}.`)
 
-    
-    status('Creating blob... (5/8)', false, `save :: creating new blob for logs...`)
+    status('Creating blob... (7/11)', { reset: false, label: 'save' }, `Creating new blob for logs...`)
     res = await fetch(`https://mrvs.city/.netlify/git/github/git/blobs`, {
       method: 'POST',
       headers,
@@ -184,7 +217,12 @@ custom_manifest: logs.manifest.json
     })
     const new_blob = await res.json()
 
-    if (!new_blob.sha) throw `bad new blob ${JSON.stringify(new_blob)}`
+    if (!new_blob.sha) {
+      status('Bad blob.', { groupCollapsed: true, error: true, reset: false, label: 'save' }, `Bad new blob.`)
+      status(null, { error: true }, new_blob)
+      throw groupEnd()
+    }
+
     const new_subtree_content = {
       base_tree: subtree.sha,
       tree: [
@@ -198,7 +236,7 @@ custom_manifest: logs.manifest.json
       ]
     }
 
-    status('Creating subtree... (6/8)', false, `save :: creating new subtree for _data/ with blob ${new_blob.sha}...`)
+    status('Creating subtree... (8/11)', { reset: false, label: 'save' }, `Creating new subtree for _data/ with blob ${new_blob.sha}...`)
     res = await fetch(`https://mrvs.city/.netlify/git/github/git/trees`, {
       method: 'POST',
       headers,
@@ -206,7 +244,12 @@ custom_manifest: logs.manifest.json
     })
     const new_subtree = await res.json()
 
-    if (!new_subtree.sha) throw `bad new tree ${JSON.stringify(new_subtree)}`
+    if (!new_subtree.sha) {
+      status('Bad subtree.', { groupCollapsed: true, error: true, reset: false, label: 'save' }, `Bad new subtree.`)
+      status(null, { error: true }, new_subtree)
+      throw groupEnd()
+    }
+
     const new_tree_content = {
       base_tree: tree.sha,
       tree: [
@@ -220,7 +263,7 @@ custom_manifest: logs.manifest.json
       ]
     }
 
-    status('Creating tree... (7/8)', false, `save :: creating new tree for commit with blob ${new_blob.sha}...`)
+    status('Creating tree... (9/11)', { reset: false, label: 'save' }, `Creating new tree for commit with blob ${new_blob.sha}...`)
     res = await fetch(`https://mrvs.city/.netlify/git/github/git/trees`, {
       method: 'POST',
       headers,
@@ -228,7 +271,12 @@ custom_manifest: logs.manifest.json
     })
     const new_tree = await res.json()
 
-    if (!new_tree.sha) throw `bad new tree ${JSON.stringify(new_tree)}`
+    if (!new_tree.sha) {
+      status('Bad tree.', { groupCollapsed: true, error: true, reset: false, label: 'save' }, `Bad new tree.`)
+      status(null, { error: true }, new_tree)
+      throw groupEnd()
+    }
+
     const new_commit_content = {
       message: '* Update logs [auto]',
       tree: new_tree.sha,
@@ -240,7 +288,7 @@ custom_manifest: logs.manifest.json
       }
     }
 
-    status('Creating commit... (8/8)', false, `save :: creating new commit for tree ${new_tree.sha}...`)
+    status('Creating commit... (10/11)', { reset: false, label: 'save' }, `Creating new commit for tree ${new_tree.sha}...`)
     res = await fetch(`https://mrvs.city/.netlify/git/github/git/commits`, {
       method: 'POST',
       headers,
@@ -248,8 +296,23 @@ custom_manifest: logs.manifest.json
     })
     const new_commit = await res.json()
 
-    if (!new_commit.sha) throw `bad new commit ${JSON.stringify(new_commit)}`
-    status('Updating HEAD...', false, `save :: updating ref master for commit ${new_commit.sha}...`)
+    if (!new_commit.sha) {
+      status('Bad commit.', { groupCollapsed: true, error: true, reset: false, label: 'save' }, `Bad new commit.`)
+      status(null, { error: true }, new_commit)
+      throw groupEnd()
+    }
+
+    status('Updating HEAD...', { reset: false, label: 'save' }, `Updating refs for commit ${new_commit.sha}...`)
+    fetch(`https://mrvs.city/.netlify/git/github/git/refs/heads/logs`, {
+      method: 'PATCH',
+      headers,
+      body: JSON.stringify({ sha: logs_ref })
+    })
+      .then(async res => {
+        const new_ref = await res.json()
+        status(null, { label: 'save' }, `Updated ref heads/logs to ${logs_ref}. `, new_ref)
+      })
+
     res = await fetch(`https://mrvs.city/.netlify/git/github/git/refs/heads/master`, {
       method: 'PATCH',
       headers,
@@ -257,7 +320,8 @@ custom_manifest: logs.manifest.json
     })
     const new_ref = await res.json()
 
-    status('Saved.', true, 'save :: done', new_ref)
+    groupEnd()
+    status('Saved.', { label: 'save' }, 'Done. ', new_ref)
 
     return data2
   }
@@ -313,6 +377,8 @@ custom_manifest: logs.manifest.json
     document.getElementById('toolbar').insertBefore(logoutEl, document.getElementById('save'))
     document.getElementById('toolbar').insertBefore(currentUserEl, logoutEl)
     netlifyIdentity.close()
+
+    checkStale()
   })
   netlifyIdentity.on('close', deque)
 
