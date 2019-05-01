@@ -30,7 +30,7 @@ comments: false
             {% if attire.svg %}
               {% include vectorattire/{{ attire.svg }}.svg %}</i>
             {% else %}
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 300 300">
               {%- assign items = attire.items | reverse -%}
                 <defs>
               {% for item in items %}
@@ -47,6 +47,8 @@ comments: false
                   <path d="{{ site.data.vectorattire.paths[path.type] }}" fill="{{ path.fill }}">
                 {% elsif path.rect %}
                   <rect x="{{ path.rect.x }}" y="{{ path.rect.y }}" width="{{ path.rect.w }}" height="{{ path.rect.h }}" rx="{{ path.rect.r }}" ry="{{ path.rect.r }}" fill="{{ path.fill }}" />
+                {% elsif path.href %}
+                  <image x="{{ path.x }}" y="{{ path.y }}" width="{{ path.w }}" height="{{ path.h }}" xlink:href="{{ path.href }}" />
                 {% else %}
                   <path d="{{ path.d }}" fill="{{ path.fill }}">
                 {% endif %}

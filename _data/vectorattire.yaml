@@ -1,6 +1,104 @@
 # - div: April
 
 log:
+  - date: 1 May 2019
+    items:
+      - hippocampus
+      - uniqlotee_black
+      - jeans_black
+      - iniki
+
+  - date: 30 April 2019
+    items:
+      - csshood
+      - superdry_blue
+      - ezyjeans_red
+      - pureboost
+
+  - date: 29 April 2019
+    items:
+      - nextchen
+      - uniqlotee_black
+      - ezyjeans_red
+      - iniki
+
+  - date: 28 April 2019
+    items:
+      - nextchen
+      - uniqlotee_black
+      - ezyjeans_red
+      - slipons_black
+
+  - date: 27 April 2019
+    items:
+      - nextchen
+      - uniqlotee_black
+      - ezyjeans_red
+      - slipons_black
+
+  - date: 26 April 2019
+    items:
+      - nextchen
+      - uniqlotee_black
+      - ezyjeans_red
+      - slipons_black
+
+  - date: 25 April 2019
+    items:
+      - nextwaffle
+      - bloomberg
+      - ezyjeans_red
+      - barker
+
+  - date: 24 April 2019
+    items:
+      - nextchen
+      - tedbaker
+      - ezyjeans_red
+      - pureboost
+
+  - date: 23 April 2019
+    items:
+      - nextwaffle
+      - threadless_white
+      - jeans_blue
+      - pureboost
+
+  - date: 22 April 2019
+    items:
+      - nextwaffle
+      - threadless_white
+      - jeans_blue
+      - pureboost
+
+  - date: 21 April 2019
+    items:
+      - nextwaffle
+      - threadless_white
+      - jeans_blue
+      - slipons_black
+
+  - date: 20 April 2019
+    items:
+      - hippocampus
+      - threadless_white
+      - ezyjeans_red
+      - pureboost
+
+  - date: 19 April 2019
+    items:
+      - nextwool
+      - threadless_white
+      - ezyjeans_red
+      - slipons_black
+
+  - date: 18 April 2019
+    items:
+      - nextchen
+      - threadless_white
+      - jeans_blue
+      - slipons_black
+
   - date: 17 April 2019
     items:
       - nextchen
@@ -132,6 +230,11 @@ wardrobe:
     svg:
       - type: shoe
         fill: '#262262'
+  barker:
+    desc: Barker Leather Oxfords
+    svg:
+      - type: shoe
+        fill: '#231f20'
   slipons_black:
     desc: MUJI Organic Cotton Slip-On Sneakers &mdash; Black
     svg:
@@ -221,6 +324,16 @@ wardrobe:
     svg: 
       - type: tee
         fill: '#9fc'
+  tedbaker:
+    desc: TED BAKER T-shirt &mdash; Black
+    svg: 
+      - type: tee
+        fill: '#231f20'
+  superdry_blue:
+    desc: SUPERDRY Black Label T-shirt (Unbranded) &mdash; Blue
+    svg: 
+      - type: tee
+        fill: '#339'
   tee_red:
     desc: T-shirt (Unbranded) &mdash; Red
     svg: 
@@ -232,6 +345,16 @@ wardrobe:
     svg:
       - type: cardigan
         fill: '#339'
+  csshood:
+    desc: CSS BRISTOL 2018/19 'Apple' Hoodie
+    svg:
+      - type: hoodie
+        fill: '#231f20'
+      - href: '/assets/images/css_rainbow.svg'
+        x: 150
+        y: 105
+        w: 30
+        h: 30
   jumper_chen:
     desc: RIVER ISLAND Chenille Jumper &mdash; Pink
     svg:
@@ -247,6 +370,16 @@ wardrobe:
     svg:
       - type: jumper
         fill: '#231f20'
+  nextwaffle:
+    desc: NEXT Waffle Knit Jumper &mdash; Navy
+    svg:
+      - type: jumper
+        fill: '#262262'
+  nextwool:
+    desc: NEXT Lambswool Jumper &mdash; Pink
+    svg:
+      - type: jumper
+        fill: '#fcf'
   hollister:
     desc: HOLLISTER Striped Crew Sweatshirt
     defs:
@@ -273,6 +406,7 @@ paths:
   tee: M150,97.5a10,10,0,0,0,9.7-7.6c-3.22.06-6.45.1-9.69.1s-6.48,0-9.71-.11A10,10,0,0,0,150,97.5Z
   tee_uc: M256.25,75c-28.82,7.73-62,11.55-93.76,12.34v.16a12.5,12.5,0,0,1-25,0v-.16C105.77,86.55,72.57,82.73,43.75,75L37.5,100c23.25,6.25,50,10.38,75,12.5V185h75V112.5c25-2.12,51.75-6.25,75-12.5Z
   jumper: M256.25,75c-28.82,7.73-62,11.55-93.76,12.34v.16a12.5,12.5,0,0,1-25,0v-.16C105.77,86.55,72.57,82.73,43.75,75L37.5,100c23.25,6.25,50,10.38,75,12.5V185h75V112.5c25-2.12,51.75-6.25,75-12.5Z
+  hoodie: M256.25,75c-28.82,7.73-62,11.55-93.76,12.34v.16a12.5,12.5,0,0,1-25,0v-.16C105.77,86.55,72.57,82.73,43.75,75L37.5,100c23.25,6.25,50,10.38,75,12.5V185h75V112.5c25-2.12,51.75-6.25,75-12.5Z
   cardigan: M131.48,84.65C99.33,83.41,69.22,79.24,44.4,72.59l-2.46-.66-7.46,29.85,2.37.63C63.52,109.58,91,113.09,110,114.79V212.5h30L133.77,84.74ZM258.06,71.93l-2.46.65c-24.86,6.66-55,10.84-87.06,12.07l-2.29.09L160,212.5h30V114.79c19.05-1.7,46.48-5.21,73.15-12.38l2.37-.63Z
   shirt: M256.3,75c-26.2,7-56,10.8-85.1,12c1.8,3.2,3.1,9.2,3.5,11.2l0.9,4.3L162.6,98l-1.3-5.2c-2,4.2-6.3,7.2-11.3,7.2c-5,0-9.3-2.9-11.3-7.1l-1.3,5.1l-12.9,4.6l0.9-4.3c0.4-2,1.7-8,3.5-11.2C99.8,85.8,70,82,43.8,75l-6.3,25c23.3,6.3,50,10.4,75,12.5V185h75v-72.5c25-2.1,51.8-6.3,75-12.5L256.3,75zM138.4,83.8l-3.1,12.3l-7.5,2.7c0,0,1.8-9,3.8-11.3C132.8,86,138.4,83.8,138.4,83.8zM161.6,83.8l3.1,12.3l7.5,2.7c0,0-1.8-9-3.8-11.3C167.2,86,161.6,83.8,161.6,83.8z
 
