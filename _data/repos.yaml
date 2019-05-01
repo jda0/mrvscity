@@ -68,6 +68,19 @@
   svg: md-accessibility
   lastcommit: 4/19
 
+- title: Sentidash
+  links:
+  - url: gh!antisocial-network/dashboard
+  desc: An online dashboard for social sentiment of companies, powered by FastText, Twitter and Microsoft Cognitive Services.
+  langs:
+  - aws
+  - py
+  - js
+  - nosql
+  - react
+  - web
+  svg: sentidash-mark
+  lastcommit: 4/19
 
 - div: 2018
 
