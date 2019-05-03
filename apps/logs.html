@@ -146,7 +146,7 @@ custom_manifest: logs.manifest.json
 
     if (!ref.object || ref.object.type !== 'commit' || !ref.object.sha) throw status('Failed.', { error: true, label: 'checkStale' }, 'Bad ref heads/logs.')
 
-    if (ref.object.sha.slice(0, 7) !== lastDefined) status('Stale! Logs may be inaccurate.', { reset: false, label: 'checkStale' }, `Stale (${ref.object.sha.slice(0, 7)} ≠ ${lastDefined}).`)
+    if (ref.object.sha.slice(0, 7) !== lastDefined) status('Stale! <a href="#" onclick="location.reload">Reload</a>', { reset: false, label: 'checkStale' }, `Stale (${ref.object.sha.slice(0, 7)} ≠ ${lastDefined}).`)
     else status('Certified fresh.', { label: 'checkStale' }, 'Up to date.')
   }
 
