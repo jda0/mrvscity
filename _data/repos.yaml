@@ -360,6 +360,8 @@
 
 - title: Explorer
   links:
+  - url: /apps/explorer
+    title: Play
   - url: gh!jda0/explorer
   langs: 
   - coffee

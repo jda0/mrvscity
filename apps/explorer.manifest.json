@@ -1,0 +1,17 @@
+{
+  "name": "mrvs :: Explorer",
+  "short_name": "Explorer",
+  "description": "Puzzle game for wanderers",
+  "lang": "en-GB",
+  "start_url": "/apps/explorer",
+  "display": "standalone",
+  "theme_color": "#eee",
+  "background_color": "#fff",
+  "icons": [
+    {
+      "src": "/apps/explorer.favicon.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    }
+  ]
+}
