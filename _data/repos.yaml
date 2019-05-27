@@ -6,7 +6,7 @@
   - url: /assets/meng-poster.pdf
     title: Project
   desc: 
-    Final Year, MEng Computer Science with Study Abroad. My final term is focused on online ML for the sentiment analysis of social interactions for financial prediction, and a business plan for a society management tool
+    Final Year, MEng Computer Science with Study Abroad. My final term is focused on sentiment analysis of social interactions for financial prediction, and a business plan for a society management tool
   lastcommit: 8/19
 
 - title: Outreach Officer at CSS Bristol
@@ -70,8 +70,11 @@
 
 - title: Sentidash
   links:
+  - url: //sn.mrvs.city
   - url: gh!antisocial-network/dashboard
-  desc: An online dashboard for social sentiment of companies, powered by FastText, Twitter and Microsoft Cognitive Services.
+  - url: /assets/sentidash.pdf
+    title: Report
+  desc: An online dashboard for social sentiment of companies, powered by FastText, Twitter and Microsoft Cognitive Services
   langs:
   - aws
   - py

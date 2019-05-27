@@ -86,7 +86,7 @@ custom_header: true
                 {%- elsif link.url contains 'gl!' -%}Repo
                 {%- else -%}Link{%- endif -%}
                 {%- endcapture -%}
-                , <a href="{% if link.url contains '//' %}{{ link.url }}" target="_blank" rel="noopener{% elsif link.url contains 'gl!' %}https://gitlab.com/{{ link.url | remove_first: 'gl!' }}" target="_blank" rel="noopener{% elsif link.url contains 'gh!' %}https://github.com/{{ link.url | remove_first: 'gh!' }}" target="_blank" rel="noopener{% elsif link.url contains '.pdf' %}{{ link.url }} target="_blank{% else %}{{ link.url }}{% endif %}" title="{{ link_title }}: {{ link.url | remove_first: '//' }}">{{ link_title }}</a>
+                , <a href="{% if link.url contains '//' %}{{ link.url }}" target="_blank" rel="noopener{% elsif link.url contains 'gl!' %}https://gitlab.com/{{ link.url | remove_first: 'gl!' }}" target="_blank" rel="noopener{% elsif link.url contains 'gh!' %}https://github.com/{{ link.url | remove_first: 'gh!' }}" target="_blank" rel="noopener{% elsif link.url contains '.pdf' %}{{ link.url }}" target="_blank{% else %}{{ link.url }}{% endif %}" title="{{ link_title }}: {{ link.url | remove_first: '//' }}">{{ link_title }}</a>
               {%- endfor -%}
               {%- endcapture -%}
 
