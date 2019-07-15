@@ -1,13 +1,21 @@
 - div: 2019
 
-- title: Studying at University of Bristol
+- title: Graduated from University of Bristol
   links:
   - url: //bris.ac.uk
   - url: /assets/meng-poster.pdf
     title: Project
   desc: 
-    Final Year, MEng Computer Science with Study Abroad. My final term is focused on sentiment analysis of social interactions for financial prediction, and a business plan for a society management tool
+    MEng Computer Science with Study Abroad. My final project was focused on sentiment analysis of social interactions for financial prediction, and a business plan for a society management tool
   lastcommit: 8/19
+
+- title: STEM Outreach
+  links:
+  - url: //outreach.mrvs.city
+  desc: 
+    Creating and delivering free workshops in Bristol in computer science, robotics and related fields.
+  svg: ios-heart
+  lastcommit: 7/19
 
 - title: Outreach Officer at CSS Bristol
   links:
@@ -16,21 +24,21 @@
     title: About
   desc: 
     Coordinating with University of Bristol and external organisations to increase STEM engagement, I also held the position of Acting Press Officer from September to December 2018, managing branding, publicity and social media presence for the 2.1k+ member society
-  lastcommit: 8/19
+  lastcommit: 6/19
 
 - title: Teaching Assistant at University of Bristol
   links:
   - url: //bris.ac.uk
   desc: 
     Mentoring undergraduate teams on the fulfillment of client-driven software development projects, and helping with the teaching of Agile methodology, database technologies and computer security
-  lastcommit: 8/19
+  lastcommit: 6/19
 
 - title: Bristol PLUS Award
   links:
   - url: //bris.ac.uk/careers/employable/plus-award/
   desc: 
     Award for extra-curricular development endorsed by companies and professional bodies like Accenture, BAE Systems and ICAEW
-  lastcommit: 8/19
+  lastcommit: 6/19
 
 - title: Logs
   links:
