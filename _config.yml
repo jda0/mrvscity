@@ -21,6 +21,9 @@ linkedin_username: 0jda0
 disqus:
   shortname: jda0
 
+include:
+  - _headers
+
 permalink: :categories/:short_year:month/:title
 
 plugins:
