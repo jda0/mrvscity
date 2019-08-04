@@ -2,7 +2,7 @@
 
 workbox.core.setCacheNameDetails({
   prefix: 'mrvs',
-  suffix: 'v1',
+  suffix: 'v1.1',
   precache: 'precache',
   runtime: 'runcache'
 })
