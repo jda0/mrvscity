@@ -4,12 +4,6 @@
   class: 'webring'
   svg: 'webring-mark'
 
-- name: 'messenger'
-  username: '0jda0'
-  url: '//m.me/0jda0'
-  svg: 'messenger-mark'
-  color1: 209
-
 - name: 'twitter'
   username: 'jda0_'
   url: '//twitter.com/jda0_'

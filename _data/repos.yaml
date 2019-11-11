@@ -1,5 +1,20 @@
 - div: 2019
 
+- title: Fullstack Developer at Roam Analytics
+  links:
+  - url: //roamanalytics.com
+  desc: 
+    Roam is building the natural language processing infrastructure for modern healthcare systems. As an applications enginner, I'm working to make that knowledge accessible to those who can do great things with it.
+  lastcommit: 9/19
+
+- title: Moved to San Francisco
+  links:
+  - url: //siliconvalleyinternship.com
+    title: SVIP
+  desc: 
+    Participant in the Silicon Valley Internship Programme 2019/20.
+  lastcommit: 9/19
+
 - title: Graduated from University of Bristol
   links:
   - url: //bris.ac.uk
@@ -41,8 +56,6 @@
   lastcommit: 6/19
 
 - title: Logs
-  links:
-  - url: /apps/logs
   desc: Trackers for various things like activity and hydration, with a static client-side CMS that updates the site through Netlify Git Gateway 
   langs:
   - git
