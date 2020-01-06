@@ -4,7 +4,7 @@
   links:
   - url: //roamanalytics.com
   desc: 
-    Roam is building the natural language processing infrastructure for modern healthcare systems. As an applications enginner, I'm working to make that knowledge accessible to those who can do great things with it.
+    Roam is building the natural language processing infrastructure for modern healthcare systems. As an applications engineer, I'm working to make that knowledge accessible to those who can do great things with it.
   lastcommit: 9/19
 
 - title: Moved to San Francisco
@@ -21,7 +21,7 @@
   - url: /assets/meng-poster.pdf
     title: Project
   desc: 
-    MEng Computer Science with Study Abroad. My final project was focused on sentiment analysis of social interactions for financial prediction, and a business plan for a society management tool
+    MEng Computer Science with Study Abroad. My final project was focused on sentiment analysis of social interactions for financial prediction, and a business plan for a society management tool.
   lastcommit: 8/19
 
 - title: STEM Outreach
@@ -38,25 +38,25 @@
   - url: /css
     title: About
   desc: 
-    Coordinating with University of Bristol and external organisations to increase STEM engagement, I also held the position of Acting Press Officer from September to December 2018, managing branding, publicity and social media presence for the 2.1k+ member society
+    Coordinating with University of Bristol and external organisations to increase STEM engagement, I also held the position of Acting Press Officer from September to December 2018, managing branding, publicity and social media presence for the 2.1k+ member society.
   lastcommit: 6/19
 
 - title: Teaching Assistant at University of Bristol
   links:
   - url: //bris.ac.uk
   desc: 
-    Mentoring undergraduate teams on the fulfillment of client-driven software development projects, and helping with the teaching of Agile methodology, database technologies and computer security
+    Mentoring undergraduate teams on the fulfillment of client-driven software development projects, and helping with the teaching of Agile methodology, database technologies and computer security.
   lastcommit: 6/19
 
 - title: Bristol PLUS Award
   links:
   - url: //bris.ac.uk/careers/employable/plus-award/
   desc: 
-    Award for extra-curricular development endorsed by companies and professional bodies like Accenture, BAE Systems and ICAEW
+    Award for extra-curricular development endorsed by companies and professional bodies like Accenture, BAE Systems and ICAEW.
   lastcommit: 6/19
 
 - title: Logs
-  desc: Trackers for various things like activity and hydration, with a static client-side CMS that updates the site through Netlify Git Gateway 
+  desc: Trackers for various things like activity and hydration, with a static client-side CMS that updates the site through Netlify Git Gateway.
   langs:
   - git
   - js
@@ -71,31 +71,28 @@
     title: Dice
   - url: /apps/pomo
     title: Pomodoro
-  desc: Personal, minimal web tools (digital dice and a pomodoro timer), with configuration options settable through the URI hash; to share dice with someone, click 'Live', share the URI with them then click 'Live' on the their device
+  desc: Personal, minimal web tools (digital dice and a pomodoro timer), with configuration options settable through the URI hash; to share dice with someone, click 'Live', share the URI with them then click 'Live' on the their device.
   langs:
   - js
   - node
   - web
   lastcommit: 4/19
 
-- title: Vectorattire
-  links:
-  - url: /vectorattire
-  desc: A daily gallery of what I'm wearing
-  langs:
-  - liquid
-  - svg
-  - web
-  svg: md-accessibility
-  lastcommit: 4/19
+# - title: Vectorattire
+#   desc: A daily gallery of what I'm wearing
+#   langs:
+#   - liquid
+#   - svg
+#   - web
+#   svg: md-accessibility
+#   lastcommit: 4/19
 
 - title: Sentidash
   links:
-  - url: //sn.mrvs.city
   - url: gh!antisocial-network/dashboard
   - url: /assets/sentidash.pdf
     title: Report
-  desc: An online dashboard for social sentiment of companies, powered by FastText, Twitter and Microsoft Cognitive Services
+  desc: An online dashboard for social sentiment of companies, powered by FastText, Twitter and Microsoft Cognitive Services.
   langs:
   - aws
   - py
@@ -104,13 +101,14 @@
   - react
   - web
   svg: sentidash-mark
+  archived: true
   lastcommit: 4/19
 
 - div: 2018
 
 - title: Takon.me
   links:
-  - url: //takon.me
+  - url: https://d25x2zqiij23ku.cloudfront.net
   - url: gh!jda0/cloud
   langs:
   - aws
@@ -119,16 +117,16 @@
   - nosql
   - react
   - web
-  desc: An online continuous double auction for event tickets
+  desc: An online continuous double auction for event tickets, powered by AWS CloudFront, Cognito and Lambda.
   svg: takon-mark
   lastcommit: 1/19
 
 - title: Proc
-  links:
-  - url: gh!jda0/proc_simple
+#   links:
+#   - url: gh!jda0/proc_simple
   langs:
   - cpp
-  desc: A superscalar processor simulator, with modular architecture and customisable ISA
+  desc: A superscalar processor simulator, with modular architecture and customisable ISA.
   private: true
   lastcommit: 1/19
 
@@ -142,7 +140,7 @@
   - liquid
   - ux
   - web
-  desc: A redesigned home, with new activities and learning resources, for the introduction to IoT and robotics used by 500+ children
+  desc: A redesigned home, with new activities and learning resources, for the introduction to IoT and robotics used by 500+ children.
   svg: hedgehog-bot
   tag:
     type: organization
@@ -155,7 +153,7 @@
   - url: gh!hundredrabbits/themes
   langs: 
   - js
-  desc: WCAG2 evaluation for the Hundred Rabbits theme ecosystem
+  desc: WCAG2 evaluation for the Hundred Rabbits theme ecosystem.
   svg: themes-mark
   tag:
     type: git-merge
@@ -174,7 +172,7 @@
   - nosql
   - rn
   desc: 
-    Cross-platform app, backend for messaging and data sync, and BLE firmware for a health and wellness startup
+    Cross-platform app, backend for messaging and data sync, and BLE firmware for a health and wellness startup.
   svg: yuscan-mark
   tag:
     type: organization
@@ -198,28 +196,28 @@
 
 - title: Studied at HKUST
   desc: 
-    An exchange year at Hong Kong University of Science and Technology, studying Deep Learning for Vision, AI, Cloud Computing/Big Data, Cybersecurity, AI Entrepreneurship, Graphics Rendering and Social Information Networks
+    An exchange year at Hong Kong University of Science and Technology, studying Deep Learning for Vision, AI, Cloud Computing/Big Data, Cybersecurity, AI Entrepreneurship, Graphics Rendering and Social Information Networks.
   lastcommit: 8/19
 
 - title: Animator &amp; Trace
-  links:
-  - url: gh!jda0/comp4411-4
-    title: Animator
-  - url: gh!jda0/comp4411-3
-    title: Trace
+#   links:
+#   - url: gh!jda0/comp4411-4
+#     title: Animator
+#   - url: gh!jda0/comp4411-3
+#     title: Trace
   langs: 
   - cpp
-  desc: 3D Spline-Based Animation System and Ray-Tracing OpenGL Renderer
+  desc: 3D Spline-Based Animation System and Ray-Tracing OpenGL Renderer.
   svg: trace-mark
   private: true
   lastcommit: 4/18
 
 - title: Impressionist
-  links:
-  - url: gh!jda0/comp4411-1
+#   links:
+#   - url: gh!jda0/comp4411-1
   langs: 
   - cpp
-  desc: An Impressionist Painting Program
+  desc: An Impressionist Painting Program, written in OpenGL.
   svg: impressionist-mark
   private: true
   lastcommit: 2/18
@@ -230,18 +228,18 @@
   langs: 
   - scss
   - ux
-  desc: An Opinionated SCSS Framework
+  desc: An Opinionated SCSS Framework.
   svg: cactus-mark
   lastcommit: 2/18
 
 - div: 2017
 
 - title: Canaries
-  links:
-  - url: gh!jda0/comp3632-1
+#   links:
+#   - url: gh!jda0/comp3632-1
   langs: 
   - cpp
-  desc: Buffer Overflow Implementations
+  desc: Buffer Overflow Implementations.
   private: true
   svg: canary-mark
   lastcommit: 12/17
@@ -254,45 +252,45 @@
   - aws
   - js
   - nosql
-  desc: Messenger Bot for Competition Management
+  desc: Messenger Bot for Competition Management.
   svg: score-mark
   lastcommit: 12/17
 
 - title: Convolutional Networks
-  links:
-  - url: gh!jda0/comp4901j-2
+#   links:
+#   - url: gh!jda0/comp4901j-2
   langs: 
   - py
   - tf
-  desc: Fully-Connected Neural Networks for Vision
+  desc: Fully-Connected Neural Networks for Vision.
   svg: tensorflow-mark
   private: true
   lastcommit: 12/17
 
 - title: K-Anonymity
-  links:
-  - url: gh!jda0/comp3632-kanon
+#   links:
+#   - url: gh!jda0/comp3632-kanon
   langs: 
   - py
-  desc: Implementation of K-Anonymity
+  desc: Implementation of K-Anonymity.
   svg: kanon-mark
   private: true
   lastcommit: 11/17
 
 - title: Style Transfer
-  links:
-  - url: gh!jda0/comp4901j-3
+#   links:
+#   - url: gh!jda0/comp4901j-3
   langs: 
   - py
   - tf
-  desc: GANs, Captioning and Style Transfer with Neural Networks
+  desc: GANs, Captioning and Style Transfer with Neural Networks.
   svg: tensorflow-mark
   private: true
   lastcommit: 11/17
 
 - title: Project Martini
-  links:
-  - url: gh!jda0/qbranch-martini
+#   links:
+#   - url: gh!jda0/qbranch-martini
   langs:
   - aws
   - cpp 
@@ -301,7 +299,7 @@
   - nosql
   - rn
   - ux
-  desc: Smart heating control for enterprise with intelligent scheduling and conflict resolution, focused on energy efficiency and controllable from users' smartphones
+  desc: Smart heating control for enterprise with intelligent scheduling and conflict resolution, focused on energy efficiency and controllable from users' smartphones.
   svg: martini-mark
   private: true
   tag:
@@ -313,14 +311,14 @@
 - div: 2016
 
 - title: The Duke of Edinburgh's Gold Award
-  desc: The highest in a series of awards requiring up to 18 months of volunteering, personal development in a skill and physical pursuit, and an expedition 
+  desc: The highest in a series of awards requiring up to 18 months of volunteering, personal development in a skill and physical pursuit, and an expedition.
 
 - title: Game of Life
   links:
   - url: gh!jda0/coms20001-gol2
   langs: 
   - xc
-  desc: Parallelised Conway's Game of Life
+  desc: Parallelised Conway's Game of Life.
   archived: true
   svg: gol-mark
   lastcommit: 12/16
@@ -332,7 +330,7 @@
   - url: gh!jda0/yatzi
   langs: 
   - js
-  desc: Dice Game for Mobile/Web
+  desc: Dice Game for Mobile/Web.
   svg: yatzi-mark
   lastcommit: 9/15
 
@@ -347,7 +345,7 @@
   - node
   - nosql
   - sql
-  desc: Behaviour and competition tracking for youth groups
+  desc: Behaviour and competition tracking for youth groups.
   archived: true
   svg: flyt-mark
   lastcommit: 7/15
@@ -364,7 +362,7 @@
   - coffee
   - node
   - nosql
-  desc: Youth group management tool
+  desc: Youth group management tool.
   svg: nco-mark
   archived: true
   lastcommit: 5/15
@@ -374,7 +372,7 @@
   - url: gh!jda0/nco-3
   langs: 
   - coffee
-  desc: Slackbot for NCO
+  desc: Slackbot for NCO.
   archived: true
   svg: slack-mark
   lastcommit: 8/15
@@ -386,7 +384,7 @@
   - url: gh!jda0/explorer
   langs: 
   - coffee
-  desc: Puzzle Game
+  desc: Puzzle Game.
   svg: explorer-mark
   lastcommit: 2/15
 
@@ -396,11 +394,11 @@
   langs: 
   - coffee
   - node
-  desc: Multiplayer Dice Game
+  desc: Multiplayer Dice Game.
   svg: farkle-mark
   lastcommit: 1/15
 
 - div: 2014
 
 - title: Raleigh International Volunteer
-  desc: Procured sponsorship from Rotary International and BDO Accountancy, built a school comodor for an indigenous community, and completed a 50mi hike
+  desc: Procured sponsorship from Rotary International and BDO Accountancy, built a school comodor for an indigenous community, and completed a 50mi hike.
