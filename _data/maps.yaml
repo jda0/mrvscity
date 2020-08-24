@@ -3,6 +3,8 @@ langs:
   aws: AWS
   coffee: CoffeeScript
   cpp: C++
+  docker: Docker
+  es: Elasticsearch
   git: Git
   js: JavaScript
   liquid: Liquid
