@@ -1,4 +1,4 @@
-- div: 2019
+- div: 2020
 
 - title: Fullstack Developer at Roam Analytics
   links:
@@ -75,6 +75,8 @@
     url: gh!roaminsight
   private: true
   lastcommit: 1/20
+  
+- div: 2019
 
 - title: Moved to San Francisco
   links:
