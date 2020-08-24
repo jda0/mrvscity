@@ -8,8 +8,6 @@
   lastcommit: 9/19
   
 - title: Review
-  links:
-  - url: gh!roaminsight
   langs: 
   - docker
   - es
@@ -31,8 +29,6 @@
   lastcommit: 8/20
   
 - title: Explore
-  links:
-  - url: gh!roaminsight
   langs: 
   - docker
   - es
@@ -54,8 +50,6 @@
   lastcommit: 2/20
   
 - title: Annotate
-  links:
-  - url: gh!roaminsight
   langs: 
   - docker
   - es
