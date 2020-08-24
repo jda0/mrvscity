@@ -6,6 +6,75 @@
   desc: 
     Roam is building the natural language processing infrastructure for modern healthcare systems. As an applications engineer, I'm working to make that knowledge accessible to those who can do great things with it.
   lastcommit: 9/19
+  
+- title: Review
+  links:
+  - url: gh!roaminsight
+  langs: 
+  - docker
+  - es
+  - git
+  - js
+  - py
+  - react
+  - sql
+  - ux
+  - web
+  desc: 
+    “Industry-changing” application for reviewing pharmacovigilance reports, legal documents and journals.
+  svg: roam
+  tag:
+    type: organization
+    title: Roam Analytics
+    url: gh!roaminsight
+  private: true
+  lastcommit: 8/20
+  
+- title: Explore
+  links:
+  - url: gh!roaminsight
+  langs: 
+  - docker
+  - es
+  - git
+  - js
+  - py
+  - react
+  - sql
+  - ux
+  - web
+  desc: 
+    Application for exploring and searching large datasets of textual information.
+  svg: roam
+  tag:
+    type: organization
+    title: Roam Analytics
+    url: gh!roaminsight
+  private: true
+  lastcommit: 2/20
+  
+- title: Annotate
+  links:
+  - url: gh!roaminsight
+  langs: 
+  - docker
+  - es
+  - git
+  - js
+  - py
+  - react
+  - sql
+  - ux
+  - web
+  desc: 
+    Industry-leading application for annotating pharmacovigilance reports and other textual data.
+  svg: roam
+  tag:
+    type: organization
+    title: Roam Analytics
+    url: gh!roaminsight
+  private: true
+  lastcommit: 1/20
 
 - title: Moved to San Francisco
   links:
@@ -223,8 +292,8 @@
   lastcommit: 2/18
 
 - title: Cactus
-  links:
-  - url: gh!jda0/cactus
+#   links:
+#   - url: gh!jda0/cactus
   langs: 
   - scss
   - ux
