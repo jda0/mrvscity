@@ -13,6 +13,11 @@
   username: 'jda0'
   url: '//github.com/jda0'
   svg: 'github-mark'
+  
+- name: 'polywork'
+  username: 'jda0'
+  url: '//polywork.com/jda0'
+  svg: 'polywork-logo'
 
 - name: 'linkedin'
   username: 0jda0
