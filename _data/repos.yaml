@@ -3,6 +3,7 @@
 - title: Fullstack Engineer at Parexel AI Labs
   links:
   - url: //parexel.com
+  svg: parexel
   desc: 
     Parexel is at the heart of getting medicines to those who need them. As a full-stack engineer at Parexel AI Labs, I'm continuing the work I did at Roam to achieve this more smartly and effectively.
   lastcommit: 1/21
@@ -20,7 +21,7 @@
 - title: Applications Engineer at Roam Analytics
   links:
   - url: //roamanalytics.com
-  svg: parexel
+  svg: roam
   desc: 
     Roam is building the natural language processing infrastructure for modern healthcare systems. As an applications engineer, I'm working to make that knowledge accessible to those who can do great things with it.
   lastcommit: 9/19
